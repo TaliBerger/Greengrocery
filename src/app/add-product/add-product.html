@@ -1,0 +1,28 @@
+<h1>Add or Delete a Product</h1>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <label for="action">Action:</label>
+  <select id="action" formControlName="action">
+    <option value="add">Add Product</option>
+    <option value="delete">Delete Product</option>
+  </select>
+
+  <label for="name">Product Name:</label>
+  <input id="name" formControlName="name" type="text" />
+
+  <label for="price" *ngIf="isAddAction()">Price:</label>
+  <div class="price-input" *ngIf="isAddAction()">
+    <span class="currency-symbol">$</span>
+    <input id="price" formControlName="price" type="text" />
+  </div>
+
+  <label for="imageUrl" *ngIf="isAddAction()">Image URL:</label>
+  <input id="imageUrl" formControlName="imageUrl" type="text" *ngIf="isAddAction()" />
+
+  <label for="category">Category (fruit/vegetable):</label>
+  <input id="category" formControlName="category" type="text" />
+
+  <label for="link" *ngIf="isAddAction()">Learn More Link:</label>
+  <input id="link" formControlName="link" type="text" *ngIf="isAddAction()" />
+
+  <button type="submit" [disabled]="productForm.invalid && isAddAction()">Submit</button>
+</form>

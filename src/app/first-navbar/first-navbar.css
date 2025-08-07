@@ -1,0 +1,33 @@
+.navigation-buttons {
+  background-color: #535151; 
+  overflow: hidden; 
+  border-radius: 10px; 
+  margin-bottom: 90px; 
+  display: flex; 
+  justify-content: flex-start; 
+  padding: 3px; 
+}
+
+.nav-link {
+  color: white; 
+  text-align: center; 
+  padding: 14px 20px; 
+  text-decoration: none; 
+  border-radius: 5px; 
+  transition: all 0.3s ease; 
+  background-color: transparent; 
+}
+
+.nav-link:hover {
+  background-color: #466e55; 
+  color: #ffffff; 
+}
+
+
+* {
+  font-family: "Noto Sans Mono", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}

@@ -1,0 +1,6 @@
+.image-grid {
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 10px;
+}

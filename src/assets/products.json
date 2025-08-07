@@ -1,0 +1,114 @@
+
+{ "fruits": [
+    {
+      "name": "Banana",
+      "imageUrl": "assets/image/fruits_section/bananas.jpg",
+      "price": "10$",
+      "link": "https://he.wikipedia.org/wiki/%D7%91%D7%A0%D7%A0%D7%94"
+    },
+    {
+      "name": "Grapes",
+      "imageUrl": "assets/image/fruits_section/grapes.jpg",
+      "price": "5$",
+      "link": "https://he.wikipedia.org/wiki/%D7%A2%D7%99%D7%A0%D7%91"
+    },
+    {
+      "name": "Mango",
+      "imageUrl": "assets/image/fruits_section/mango.jpg",
+      "price": "8$",
+      "link": "https://he.wikipedia.org/wiki/%D7%9E%D7%A0%D7%92%D7%95"
+    },
+    {
+      "name": "Cherry",
+      "imageUrl": "assets/image/fruits_section/cherry.jpg",
+      "price": "12$",
+      "link": "https://he.wikipedia.org/wiki/%D7%93%D7%95%D7%91%D7%93%D7%91%D7%9F"
+    },
+    {
+      "name": "Peach",
+      "imageUrl": "assets/image/fruits_section/peach.jpg",
+      "price": "3$",
+      "link": "https://he.wikipedia.org/wiki/%D7%90%D7%A4%D7%A8%D7%A1%D7%A7"
+    },
+    {
+      "name": "Pineapple",
+      "imageUrl": "assets/image/fruits_section/pineapple.jpg",
+      "price": "5$",
+      "link": "https://he.wikipedia.org/wiki/%D7%90%D7%A0%D7%A0%D7%A1"
+    },
+    {
+      "name": "Strawberries",
+      "imageUrl": "assets/image/fruits_section/strawberries.jpg",
+      "price": "5$",
+      "link": "https://he.wikipedia.org/wiki/%D7%AA%D7%95%D7%AA_%D7%A9%D7%93%D7%94"
+    },
+    {
+      "name": "Watermelon",
+      "imageUrl": "assets/image/fruits_section/watermelon.jpg",
+      "price": "5$",
+      "link": "https://he.wikipedia.org/wiki/%D7%90%D7%91%D7%98%D7%99%D7%97"
+    }
+
+
+   
+ 
+
+
+
+   
+  ],
+  "vegetables": [
+    {
+      "name": "Avocado",
+      "imageUrl": "assets/image/vegetables/avocado.jpg",
+      "price": "10$",
+      "link": "https://he.wikipedia.org/wiki/%D7%90%D7%91%D7%95%D7%A7%D7%93%D7%95"
+    },
+    {
+      "name": "Tomato",
+      "imageUrl": "assets/image/vegetables/tomato.jpg",
+      "price": "3$",
+      "link": "https://he.wikipedia.org/wiki/%D7%A2%D7%92%D7%91%D7%A0%D7%99%D7%99%D7%94"
+    },
+    {
+      "name": "Beet",
+      "imageUrl": "assets/image/vegetables/beet.jpg",
+      "price": "3$",
+      "link": "https://he.wikipedia.org/wiki/%D7%A1%D7%9C%D7%A7"
+    },
+    {
+      "name": "Carrot",
+      "imageUrl": "assets/image/vegetables/carrot.jpg",
+      "price": "2$",
+      "link": "https://he.wikipedia.org/wiki/%D7%92%D7%96%D7%A8"
+    },
+    {
+      "name": "Cauliflower",
+      "imageUrl": "assets/image/vegetables/cauliflower.jpg",
+      "price": "6$",
+      "link": "https://he.wikipedia.org/wiki/%D7%9B%D7%A8%D7%95%D7%91%D7%99%D7%AA"
+    },
+    {
+      "name": "Onion",
+      "imageUrl": "assets/image/vegetables/onion.jpg",
+      "price": "2$",
+      "link": "https://he.wikipedia.org/wiki/%D7%91%D7%A6%D7%9C"
+    },
+    {
+      "name": "Red pepper",
+      "imageUrl": "assets/image/vegetables/red_pepper.jpg",
+      "price": "4$",
+      "link": "https://he.wikipedia.org/wiki/%D7%A4%D7%9C%D7%A4%D7%9C_(%D7%A4%D7%A8%D7%99)"
+    },
+    {
+      "name": "Sweet potato",
+      "imageUrl": "assets/image/vegetables/sweet_potato.jpg",
+      "price": "4$",
+      "link": "https://he.wikipedia.org/wiki/%D7%91%D7%98%D7%98%D7%94"
+    }
+
+
+    
+  ]
+
+}
