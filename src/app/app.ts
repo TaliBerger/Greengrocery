@@ -1,11 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Home } from './main-page/home';
-import { FruitsGrid } from './fruits-grid/fruits-grid';
+import { MainPage } from './components/main-page/main-page';
+import { FruitsGrid } from "./components/fruits-grid/fruits-grid";
+import { VegetablesGrid } from "./components/vegetables-grid/vegetables-grid";
+import { AddProduct } from "./components/add-product/add-product";
+import { About } from "./components/about/about";
+import { FirstNavbar } from "./components/first-navbar/first-navbar";
 
 @Component({
   selector: 'app-root',
-  imports: [Home,FruitsGrid], //RouterOutlet
+  standalone: true,
+  imports: [MainPage, FirstNavbar, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
