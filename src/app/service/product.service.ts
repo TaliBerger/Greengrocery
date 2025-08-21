@@ -1,80 +1,67 @@
+// app/service/product.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Product } from '../interface/product.interface';
 
-@Injectable({
-  providedIn: 'root',
-})
+type Category = 'fruit' | 'vegetable';
+
+@Injectable({ providedIn: 'root' })
 export class ProductService {
-  private fruits: Product[] = []; 
-  private vegetables: Product[] = []; 
+  private fruits: Product[] = [];
+  private vegetables: Product[] = [];
 
   constructor(private http: HttpClient) {}
 
-
-  getFruits(): Observable<Product[]> {
-    return of(this.fruits); 
+  // המרת "5$" -> 5 (פשוטה)
+  private parsePrice(p: string | number): number {
+    if (typeof p === 'number') return p;
+    return parseFloat((p || '').replace(/[^0-9.]/g, '')) || 0;
   }
 
-  getVegetables(): Observable<Product[]> {
-    return of(this.vegetables); 
-  }
-
-  // הוספת מוצר
-  addProduct(product: Product): void {
-    if (!product.name || !product.category || isNaN(Number(product.price))) {
-      console.error('Invalid product details:', product);
-      return;
-    }
-
-    product.price = Number(product.price); // המרת מחיר למספר
-
-    if (product.category === 'fruit') {
-      this.fruits.push(product);
-      console.log('Fruit added:', product);
-    } else if (product.category === 'vegetable') {
-      this.vegetables.push(product);
-      console.log('Vegetable added:', product);
-    } else {
-      console.error('Invalid category for product', product);
-    }
-  }
-
-  // מחיקת מוצר לפי שם וקטגוריה
-  deleteProduct(name: string, category: string): void {
-    if (!name || !category) {
-      console.error('Invalid delete parameters:', { name, category });
-      return;
-    }
-
-    if (category === 'fruit') {
-      this.fruits = this.fruits.filter(fruit => fruit.name !== name);
-      console.log('Fruit deleted:', name);
-    } else if (category === 'vegetable') {
-      this.vegetables = this.vegetables.filter(vegetable => vegetable.name !== name);
-      console.log('Vegetable deleted:', name);
-    } else {
-      console.error('Invalid category for deletion:', { name, category });
-    }
-  }
-
-  // טעינת נתונים מתוך קובץ JSON
-  loadProductsFromJson(): Observable<any> {
-    return this.http.get<any>('assets/data/products.json').pipe(
-      catchError((error) => {
-        console.error('Error loading products from JSON:', error);
-        return of({ fruits: [], vegetables: [] }); // מחזיר מבנה ריק במקרה של שגיאה
-      })
+  /** טוען מה-JSON. קוראים פעם אחת באתחול */
+  load(url = 'assets/data/products.json'): Observable<void> {
+    return this.http.get<any>(url).pipe(
+      map(raw => ({
+        fruits: (raw?.fruits ?? []).map((f: any) => ({
+          name: f.name,
+          imageUrl: f.imageUrl,
+          price: this.parsePrice(f.price),
+          link: f.link,
+          category: 'fruit' as const
+        })),
+        vegetables: (raw?.vegetables ?? []).map((v: any) => ({
+          name: v.name,
+          imageUrl: v.imageUrl,
+          price: this.parsePrice(v.price),
+          link: v.link,
+          category: 'vegetable' as const
+        })),
+      })),
+      tap(({ fruits, vegetables }) => {
+        this.fruits = fruits;
+        this.vegetables = vegetables;
+      }),
+      map(() => void 0)
     );
   }
 
-  // הפרדת נתונים לפירות וירקות
-  separateFruitsAndVegetables(data: any): void {
-    if (this.fruits.length === 0 && this.vegetables.length === 0) {
-      this.fruits = data.fruits || [];
-      this.vegetables = data.vegetables || [];
-    }
+  /** מחזירים את המערכים לשימוש בתבנית */
+  getFruits(): Product[]      { return this.fruits; }
+  getVegetables(): Product[]  { return this.vegetables; }
+
+  /** הוספה/מחיקה בסיסיות */
+  addProduct(p: Product): void {
+    p.price = this.parsePrice(p.price as any);
+    if (p.category === 'fruit')      this.fruits = [...this.fruits, p];
+    else if (p.category === 'vegetable') this.vegetables = [...this.vegetables, p];
+  }
+
+  deleteProduct(name: string, category: Category): void {
+    if (category === 'fruit')
+      this.fruits = this.fruits.filter(x => x.name !== name);
+    else
+      this.vegetables = this.vegetables.filter(x => x.name !== name);
   }
 }

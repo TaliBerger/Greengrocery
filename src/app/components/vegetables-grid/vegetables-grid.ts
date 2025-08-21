@@ -1,39 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../interface/product.interface';
 
 @Component({
   selector: 'app-vegetables-grid',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './vegetables-grid.html',
-  styleUrl: './vegetables-grid.css'
+  styleUrls: ['./vegetables-grid.css']   // <-- זה היה חסר
 })
-export class VegetablesGrid  implements OnInit, OnDestroy {
+export class VegetablesGrid {
   vegetables: Product[] = [];
-  private vegetablesSubscription!: Subscription; // מנוי
-  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {
-    // טעינת נתונים מקובץ JSON
-    this.productService.loadProductsFromJson().subscribe((data: any) => {
-      this.productService.separateFruitsAndVegetables(data);
-    });
+  constructor(private ps: ProductService) {}
 
-    // מנוי ל-Observable כדי לעדכן את רשימת הירקות
-    this.vegetablesSubscription = this.productService.getVegetables().subscribe((vegetables: Product[]) => {
-      this.vegetables = vegetables;
-      console.log('Updated vegetables:', this.vegetables);
+  ngOnInit() {
+    this.ps.load().subscribe(() => {
+      this.vegetables = this.ps.getVegetables();
+      console.log('Vegetables loaded:', this.vegetables.length, this.vegetables);
     });
   }
 
-  ngOnDestroy(): void {
-    // ביטול המנוי למניעת זליגת זיכרון
-    if (this.vegetablesSubscription) {
-      this.vegetablesSubscription.unsubscribe();
-    }
-  }
+  add(p: Product) { this.ps.addProduct(p); this.vegetables = this.ps.getVegetables(); }
+  del(p: Product) { this.ps.deleteProduct(p.name, 'vegetable'); this.vegetables = this.ps.getVegetables(); }
+
+  track = (_: number, p: Product) => p.name;
 }

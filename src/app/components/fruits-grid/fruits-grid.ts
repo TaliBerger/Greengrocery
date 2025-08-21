@@ -1,39 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Product } from '../../interface/product.interface';
 import { ProductService } from '../../service/product.service';
-
+import { Product } from '../../interface/product.interface';
 
 @Component({
   selector: 'app-fruits-grid',
-  standalone : true,
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './fruits-grid.html',
-  styleUrl: './fruits-grid.css'
+  styleUrls: ['./fruits-grid.css']
 })
-export class FruitsGrid implements OnInit, OnDestroy {
+export class FruitsGrid {
   fruits: Product[] = [];
-  private fruitsSubscription!: Subscription; // מנוי לנתוני הפירות
-  
- constructor(private productService: ProductService) {}
-  ngOnInit(): void {
-  // טעינת נתונים ראשונית מקובץ JSON
-    this.productService.loadProductsFromJson().subscribe((data: any) => {
-    this.productService.separateFruitsAndVegetables(data);
-    });
-    
-    // מנוי לנתוני הפירות
-    this.fruitsSubscription = this.productService.getFruits().subscribe((fruits: Product[]) => {
-    this.fruits = fruits; // עדכון רשימת הפירות
-      console.log('Updated fruits:', this.fruits);
+
+  constructor(private ps: ProductService) {}
+
+  ngOnInit() {
+    this.ps.load().subscribe(() => {
+      this.fruits = this.ps.getFruits();
+      console.log('Fruits loaded:', this.fruits.length, this.fruits);
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.fruitsSubscription) {
-      this.fruitsSubscription.unsubscribe();
-    }
-  }
+  add(p: Product) { this.ps.addProduct(p); this.fruits = this.ps.getFruits(); }
+  del(p: Product) { this.ps.deleteProduct(p.name, 'fruit'); this.fruits = this.ps.getFruits(); }
+
+  track = (_: number, p: Product) => p.name;
 }

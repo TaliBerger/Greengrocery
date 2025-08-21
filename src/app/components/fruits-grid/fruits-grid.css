@@ -1,12 +1,26 @@
-.fruit-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 עמודות בגודל שווה */
-  gap: 3em; /* מרווח בין התמונות */
-  margin: 10px;
-  justify-items: center; /* ממקם את כל התמונות במרכז בעמודה */
-  align-items: center; /* ממקם את כל התמונות במרכז בשורה */
+/* בסיס טיפוגרפיה – אם כבר קיים גלובלי, אפשר להסיר מכאן */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans Mono", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
+/* גריד לפירות */
+.fruit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* אם תרצי רספונסיבי יותר: auto-fill/minmax */
+  gap: 3em;
+  margin: 10px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* כרטיס פרי */
 .fruit-item {
   display: flex;
   flex-direction: column;
@@ -19,9 +33,9 @@
 
 .fruit-item img {
   border-radius: 10%;
-  width: 100%;              
-  max-height: 200px;        
-  object-fit: cover;        
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
   margin-bottom: 10px;
 }
 
@@ -31,45 +45,18 @@
   cursor: pointer;
 }
 
-h1, h2 {
-  text-align: center;
-  margin: 50px auto;
-  padding: 10px;
-  font-size: 80px;
-  width: 95%;
-}
-
+/* כותרות */
 h1 {
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 3rem;
+  width: 100%;
   background-color: rgb(110, 187, 117);
 }
 
-h2 {
-  background-color: rgb(59, 94, 58);
-  color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: all 0.3s ease;
-}
-
-h2:hover {
-  background-color: rgb(39, 70, 46);
-  transform: scale(1.05);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-* {
-  font-family: "Noto Sans Mono", serif;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; 
+/* מחיר מודגש */
+.price {
+  font-weight: 700;
+  color: #2b7a0b;
 }

@@ -2,12 +2,11 @@
 <h1>Vegetables Section</h1>
 <p>All prices are per kilogram</p>
 
-<!-- הצגת הירקות בגריד באופן דינאמי -->
 <div class="vegetables-grid">
   <div *ngFor="let vegetable of vegetables" class="vegetables-item">
-    <h3>{{ vegetable.name }}</h3>
     <img [src]="vegetable.imageUrl" alt="{{ vegetable.name }}" />
-    <p>{{ vegetable.price }}</p>
+    <h3>{{ vegetable.name }}</h3>
+    <p class="price">{{ vegetable.price }}$</p>
     <a [href]="vegetable.link" target="_blank">Learn more</a>
   </div>
 </div>

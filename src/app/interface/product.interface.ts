@@ -1,7 +1,9 @@
+export type Category = 'fruit' | 'vegetable';
+
 export interface Product {
   name: string;
   imageUrl: string;
-  price: number; 
+  price: number;
   link: string;
-  category: string; 
+  category: Category;
 }
