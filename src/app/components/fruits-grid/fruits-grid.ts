@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../interface/product.interface';
+import { CartService } from '../../service/cart.service';
 
 @Component({
   selector: 'app-fruits-grid',
@@ -13,7 +14,7 @@ import { Product } from '../../interface/product.interface';
 export class FruitsGrid {
   fruits: Product[] = [];
 
-  constructor(private ps: ProductService) {}
+  constructor(private ps: ProductService, private cart: CartService) {}
 
   ngOnInit() {
     this.ps.load().subscribe(() => {
@@ -22,8 +23,20 @@ export class FruitsGrid {
     });
   }
 
-  add(p: Product) { this.ps.addProduct(p); this.fruits = this.ps.getFruits(); }
-  del(p: Product) { this.ps.deleteProduct(p.name, 'fruit'); this.fruits = this.ps.getFruits(); }
+  add(p: Product) {
+    this.ps.addProduct(p);
+    this.fruits = this.ps.getFruits();
+  }
+
+  del(p: Product) {
+    this.ps.deleteProduct(p.name, 'fruit');
+    this.fruits = this.ps.getFruits();
+  }
+
+  addToCart(p: Product) {
+    this.cart.addToCart(p);
+    alert(`${p.name} added to cart!`);
+  }
 
   track = (_: number, p: Product) => p.name;
 }

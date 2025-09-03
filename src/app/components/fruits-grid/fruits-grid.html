@@ -6,5 +6,6 @@
     <h3>{{ fruit.name }}</h3>
     <p class="price">{{ fruit.price }}$</p>
     <a [href]="fruit.link" target="_blank">Learn more</a>
+    <button (click)="addToCart(fruit)">Add to Cart</button>
   </div>
 </div>

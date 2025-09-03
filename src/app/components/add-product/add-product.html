@@ -1,31 +1,39 @@
 <h1>Add or Delete a Product</h1>
+
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <!-- פעולה -->
   <label for="action">Action:</label>
   <select id="action" formControlName="action">
     <option value="add">Add Product</option>
     <option value="delete">Delete Product</option>
   </select>
 
+  <!-- שם מוצר -->
   <label for="name">Product Name:</label>
   <input id="name" formControlName="name" type="text" />
 
-  <label for="price" *ngIf="isAddAction()">Price:</label>
-  <div class="price-input" *ngIf="isAddAction()">
-    <span class="currency-symbol">$</span>
-    <input id="price" formControlName="price" type="number" min="1" step="1" />
-  </div>
+  <!-- שדות שרלוונטיים רק להוספה -->
+  <ng-container *ngIf="isAddAction()">
+    <label for="price">Price:</label>
+    <div class="price-input">
+      <span class="currency-symbol">$</span>
+      <input id="price" formControlName="price" type="number" min="1" step="1" />
+    </div>
 
-  <label for="imageUrl" *ngIf="isAddAction()">Image URL:</label>
-  <input id="imageUrl" formControlName="imageUrl" type="text" *ngIf="isAddAction()" />
+    <label for="imageUrl">Image URL:</label>
+    <input id="imageUrl" formControlName="imageUrl" type="text" />
 
-  <label for="category">Category (fruit/vegetable):</label>
+    <label for="link">Learn More Link:</label>
+    <input id="link" formControlName="link" type="text" />
+  </ng-container>
+
+  <!-- קטגוריה -->
+  <label for="category">Category:</label>
   <select id="category" formControlName="category">
     <option value="fruit">Fruit</option>
-    <option value="vegetable">Vegetable</option></select>
-  
+    <option value="vegetable">Vegetable</option>
+  </select>
 
-  <label for="link" *ngIf="isAddAction()">Learn More Link:</label>
-  <input id="link" formControlName="link" type="text" *ngIf="isAddAction()" />
-
+  <!-- כפתור -->
   <button type="submit" [disabled]="productForm.invalid && isAddAction()">Submit</button>
 </form>
