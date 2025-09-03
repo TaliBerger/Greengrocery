@@ -12,14 +12,17 @@
   <label for="price" *ngIf="isAddAction()">Price:</label>
   <div class="price-input" *ngIf="isAddAction()">
     <span class="currency-symbol">$</span>
-    <input id="price" formControlName="price" type="text" />
+    <input id="price" formControlName="price" type="number" min="1" step="1" />
   </div>
 
   <label for="imageUrl" *ngIf="isAddAction()">Image URL:</label>
   <input id="imageUrl" formControlName="imageUrl" type="text" *ngIf="isAddAction()" />
 
   <label for="category">Category (fruit/vegetable):</label>
-  <input id="category" formControlName="category" type="text" />
+  <select id="category" formControlName="category">
+    <option value="fruit">Fruit</option>
+    <option value="vegetable">Vegetable</option></select>
+  
 
   <label for="link" *ngIf="isAddAction()">Learn More Link:</label>
   <input id="link" formControlName="link" type="text" *ngIf="isAddAction()" />
