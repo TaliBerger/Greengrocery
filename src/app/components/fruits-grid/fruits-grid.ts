@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../service/product.service';
 import { CartService } from '../../service/cart.service';
-import { Product } from '../../interface/product.interface';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-fruits-grid',
@@ -24,7 +24,6 @@ export class FruitsGrid {
     });
   }
 
-  // ---- helpers (כל אחת פעם אחת בלבד) ----
   track = (_: number, p: Product) => p.name;
 
   keyOf(p: Product): string {
@@ -51,14 +50,12 @@ export class FruitsGrid {
   confirmQty(p: Product) {
     const k = this.keyOf(p);
     const q = this.qtyInput[k] || 1;
-    // אם ה-CartService שלך מקבל פרמטר אחד בלבד, החליפי לשורה: this.cart.addToCart(p);
     this.cart.addToCart(p, q);
     this.qtyInput[k] = 1;
   }
 
   onImgError(ev: Event, p: Product): void {
     const img = ev.target as HTMLImageElement;
-    // ניסיון אחד בלבד לפלייסהולדר כדי לא להיכנס ללולאות
     img.onerror = null;
     img.src = `https://picsum.photos/seed/${encodeURIComponent(p.category + '-' + p.name)}/600/450`;
   }

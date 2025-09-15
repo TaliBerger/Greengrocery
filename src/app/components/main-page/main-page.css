@@ -1,9 +1,10 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ======= השעון – קיים אצלך ======= */
 .clock {
   color: rgb(255, 239, 239);
   font-size: 4rem;
@@ -18,84 +19,102 @@
   background: rgb(32, 30, 30);
   width: 100%;
   margin-bottom: 40px;
-  position: absolute; 
-  top: 60px; 
+  position: absolute;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-    }
-  
-  .clock > h1 {
-    font-size: 2.5rem;
-  }
-  
-  .clock span {
-    font-size: 2rem;
-  }
-  
-  .tick-hidden {
-    opacity: 0;
-  }
-  
-  .move {
-    animation: move linear 1s infinite;
-  }
-  
-  @keyframes move {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(-100%);
-    }
-  }
-  
-  .hostage {
-    background-color: red;
-    padding: 0.2rem 0.5rem;
-    border-radius: 5px;
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-  }
-  
-  .simple-button {
-    background-color: #4CAF50; /* צבע ירוק */
-    color: white; /* טקסט לבן */
-    font-size: 14px; /* גודל טקסט */
-    padding: 10px 20px; /* מרווח פנימי */
-    border: none; /* ללא מסגרת */
-    border-radius: 4px; /* פינות מעט מעוגלות */
-    cursor: pointer; /* שינוי לסמן ידני */
-  }
-  
-  .simple-button:hover {
-    background-color: #45a049; /* ירוק כהה מעט בעת מעבר עכבר */
-  }
-  
-  .footer {
-    background-color: #f1f1f1; /* צבע רקע אפור בהיר */
-    padding: 20px; /* מרווח פנימי */
-    text-align: center; /* יישור תוכן למרכז */
-    border-top: 2px solid #ccc; /* מסגרת עליונה */
-  }
-  
-  .footer h2 {
-    margin: 10px 0; /* מרווח עליון ותחתון */
-    font-size: 18px; /* גודל טקסט */
-    color: #333; /* צבע טקסט כהה */
-  }
-  
-  .footer button {
-    background-color: #4CAF50; /* צבע ירוק */
-    color: white; /* טקסט לבן */
-    font-size: 16px; /* גודל טקסט */
-    padding: 10px 20px; /* מרווח פנימי לכפתור */
-    border: none; /* ללא מסגרת */
-    border-radius: 5px; /* פינות מעוגלות */
-    cursor: pointer; /* שינוי סמן */
-  }
-  
-  .footer button:hover {
-    background-color: #45a049; /* גוון ירוק כהה יותר בעת מעבר עכבר */
-  }
-  
+}
+
+.clock > h1 {
+  font-size: 2.5rem;
+}
+
+.clock span {
+  font-size: 2rem;
+}
+
+.tick-hidden {
+  opacity: 0;
+}
+
+.move {
+  animation: move linear 1s infinite;
+}
+
+@keyframes move {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+
+.hostage {
+  background-color: red;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+
+/* ======= כפתור כללי – קיים אצלך ======= */
+.simple-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.simple-button:hover {
+  background-color: #45a049;
+}
+
+/* ======= פוטר – קיים אצלך ======= */
+.footer {
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid #ccc;
+}
+
+.footer h2 {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.footer button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer button:hover {
+  background-color: #45a049;
+}
+
+/* ======= תוספת: Badge סטטוס התחברות קבוע למעלה ======= */
+.auth-badge{
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 2000;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 0;
+  color: #fff;
+  font-weight: 700;
+  cursor: default;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+}
+.auth-badge.logged-out{ background: #d32f2f; } /* אדום */
+.auth-badge.logged-in{  background: #2e7d32; } /* ירוק */
+
+
+.sep { border: 0; border-top: 1px solid #eee; margin: 12px 0; }
+.muted { color: #555; font-size: .95rem; }

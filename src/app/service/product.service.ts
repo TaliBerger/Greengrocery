@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Product, Category } from '../interface/product.interface';
+import { Product, Category } from '../interfaces/product.interface';
 
 // כתובת ה-API שלך ב-MockAPI (עדכני אם צריך)
 const BASE = 'https://68c4981d81ff90c8e61c9e6a.mockapi.io/api/v1';

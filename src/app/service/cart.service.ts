@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from '../interface/product.interface';
+import { Product } from '../interfaces/product.interface';
 
 export interface CartItem {
   product: Product;
@@ -26,7 +26,6 @@ export class CartService {
     return this.cart;
   }
 
-  /** הוספת מוצר עם כמות (ברירת מחדל 1). מאחד שורות זהות. */
   addToCart(product: Product, qty: number = 1) {
     if (qty <= 0) return;
     const idx = this.cart.findIndex(ci => this.sameItem(ci.product, product));
@@ -38,7 +37,6 @@ export class CartService {
     this.recalcCount();
   }
 
-  /** מחיקת שורה (לא הקטנת כמות) */
   removeLine(index: number) {
     this.cart.splice(index, 1);
     this.cart = [...this.cart];
@@ -54,7 +52,6 @@ export class CartService {
     return this.cart.reduce((sum, it) => sum + it.product.price * it.qty, 0);
   }
 
-  /** קובע כמות מוחלטת לשורה (אם 0 – מוחק) */
 setQty(index: number, qty: number) {
   if (!this.cart[index]) return;
   const next = Math.floor(Number(qty));
@@ -67,7 +64,6 @@ setQty(index: number, qty: number) {
   this.recalcCount();
 }
 
-/** הוספת יחידה אחת לשורה */
 increase(index: number) {
   if (!this.cart[index]) return;
   this.cart[index] = { ...this.cart[index], qty: this.cart[index].qty + 1 };

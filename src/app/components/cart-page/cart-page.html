@@ -33,9 +33,22 @@
   <h3>סה״כ: {{ totalPrice | number:'1.2-2' }}$</h3>
 
   <div class="actions">
-    <button type="button" (click)="clearCart()">נקה סל</button>
-    <button type="button" class="submit" (click)="submitOrder()">שליחת ההזמנה</button>
+    <!-- חסימת שליחת הזמנה אם לא מחובר/ת -->
+  <button type="button" (click)="clearCart()">נקה סל</button>
+    <button
+      type="button"
+      class="submit"
+      (click)="submitOrder()"
+      [disabled]="!auth.isLoggedIn || !cart.length"
+      [title]="auth.isLoggedIn ? '' : 'יש להיכנס למערכת לפני שליחת הזמנה'">
+      שליחת ההזמנה
+    </button>
   </div>
+
+  <!-- הודעת עזר כשלא מחוברים -->
+  <p class="note" *ngIf="!auth.isLoggedIn">
+    יש להיכנס למערכת בדף הבית כדי לבצע הזמנה.
+  </p>
 </ng-container>
 
 <ng-template #empty>
