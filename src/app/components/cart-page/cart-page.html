@@ -1,0 +1,52 @@
+<h2>🛒 סל הקניות</h2>
+
+<ng-container *ngIf="(cart?.length ?? 0) > 0; else empty">
+  <ul class="cart-list">
+    <li *ngFor="let ci of (cart ?? []); let i = index; trackBy: track" class="cart-item">
+      <img [src]="ci.product.imageUrl" [alt]="ci.product.name" width="60" />
+
+      <div class="details">
+        <div class="name">{{ ci.product.name }}</div>
+        <div class="unit">מחיר ליחידה: {{ ci.product.price | number:'1.2-2' }}$</div>
+
+        <!-- עריכת כמות בתוך הסל -->
+        <div class="qty-controls">
+          <button type="button" (click)="decrease(i)">−</button>
+          <input
+            type="number"
+            [value]="ci.qty"
+            min="1"
+            (input)="setQty(i, $any($event.target).value)"
+          />
+          <button type="button" (click)="increase(i)">+</button>
+        </div>
+
+        <div class="line-total">
+          סה״כ שורה: {{ (ci.product.price * ci.qty) | number:'1.2-2' }}$
+        </div>
+      </div>
+
+      <button type="button" class="remove" (click)="removeItem(i)">הסר</button>
+    </li>
+  </ul>
+
+  <h3>סה״כ: {{ totalPrice | number:'1.2-2' }}$</h3>
+
+  <div class="actions">
+    <button type="button" (click)="clearCart()">נקה סל</button>
+    <button type="button" class="submit" (click)="submitOrder()">שליחת ההזמנה</button>
+  </div>
+</ng-container>
+
+<ng-template #empty>
+  <p>הסל ריק</p>
+</ng-template>
+
+<!-- פופאפ הצלחה -->
+<div class="overlay" *ngIf="showSuccess" (click)="closePopup()">
+  <div class="popup" (click)="$event.stopPropagation()">
+    <h3>✅ ההזמנה נשלחה בהצלחה</h3>
+    <p *ngIf="orderId">מס' הזמנה: {{ orderId }}</p>
+    <button type="button" (click)="closePopup()">סגירה</button>
+  </div>
+</div>

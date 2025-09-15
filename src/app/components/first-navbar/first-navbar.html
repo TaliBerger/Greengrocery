@@ -1,9 +1,11 @@
 <div class="navigation-buttons">
-    <a class="nav-link" [routerLink]="'/'">Home</a>
-    <a class="nav-link" [routerLink]="'/Vegetables_Section'">Vegetables Section</a>
-    <a class="nav-link" [routerLink]="'/Fruits_Section'">Fruits Section</a>
-    <a class="nav-link" [routerLink]="'/about'">About</a>
-    <a class="nav-link" [routerLink]="'/form'">Form</a>
-
-  </div>
-  
+  <a class="nav-link" routerLink="/">Home</a>
+  <a class="nav-link" routerLink="/vegetables">Vegetables Section</a>
+  <a class="nav-link" routerLink="/fruits">Fruits Section</a>
+  <a class="nav-link" routerLink="/about">About</a>
+  <a class="nav-link" routerLink="/form">Form</a>
+  <a class="nav-link" routerLink="/cart">Cart@if (cartCount > 0) {
+      <span class="cart-badge">{{ cartCount }}</span>
+    }
+  </a>
+</div>

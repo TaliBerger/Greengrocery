@@ -1,11 +1,34 @@
 <h1>Fruits Section</h1>
+<p>All prices are per kilogram</p>
 
 <div class="fruit-grid">
-  <div *ngFor="let fruit of fruits" class="fruit-item">
-    <img [src]="fruit.imageUrl" alt="{{ fruit.name }}" />
-    <h3>{{ fruit.name }}</h3>
-    <p class="price">{{ fruit.price }}$</p>
-    <a [href]="fruit.link" target="_blank">Learn more</a>
-    <button (click)="addToCart(fruit)">Add to Cart</button>
+  <div *ngFor="let p of fruits; trackBy: track" class="fruit-item card">
+    <div class="image-wrap">
+      <img
+        [src]="p.imageUrl"
+        [alt]="p.name"
+        loading="lazy"
+        (error)="onImgError($event, p)"
+      />
+    </div>
+
+    <h3>{{ p.name }}</h3>
+    <p class="price">{{ p.price | number:'1.2-2' }}$</p>
+    <a [href]="p.link" target="_blank" rel="noopener noreferrer">Learn more</a>
+
+    <div class="qty-overlay">
+      <button type="button" (click)="decQty(p)">−</button>
+      <input
+        type="number"
+        [value]="qtyInput[keyOf(p)] || 1"
+        min="1"
+        (input)="onQtyInput(p, $any($event.target).value)"
+      />
+      <button type="button" (click)="incQty(p)">+</button>
+    </div>
+
+    <button type="button" (click)="confirmQty(p)">
+      Add to Cart ({{ qtyInput[keyOf(p)] || 1 }})
+    </button>
   </div>
 </div>

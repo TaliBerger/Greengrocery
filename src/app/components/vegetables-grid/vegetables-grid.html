@@ -1,13 +1,34 @@
-<h2>Welcome to Fresh Greens!</h2>
 <h1>Vegetables Section</h1>
 <p>All prices are per kilogram</p>
 
 <div class="vegetables-grid">
-  <div *ngFor="let vegetable of vegetables" class="vegetables-item">
-    <img [src]="vegetable.imageUrl" alt="{{ vegetable.name }}" />
-    <h3>{{ vegetable.name }}</h3>
-    <p class="price">{{ vegetable.price }}$</p>
-    <a [href]="vegetable.link" target="_blank">Learn more</a>
-    <button (click)="addToCart(vegetable)">Add to Cart</button>
+  <div *ngFor="let v of vegetables; trackBy: track" class="vegetables-item card">
+    <div class="image-wrap">
+      <img
+        [src]="v.imageUrl"
+        [alt]="v.name"
+        loading="lazy"
+        (error)="onImgError($event, v)"
+      />
+    </div>
+
+    <h3>{{ v.name }}</h3>
+    <p class="price">{{ v.price | number:'1.2-2' }}$</p>
+    <a [href]="v.link" target="_blank" rel="noopener noreferrer">Learn more</a>
+
+    <div class="qty-overlay">
+      <button type="button" (click)="decQty(v)">−</button>
+      <input
+        type="number"
+        [value]="qtyInput[keyOf(v)] || 1"
+        min="1"
+        (input)="onQtyInput(v, $any($event.target).value)"
+      />
+      <button type="button" (click)="incQty(v)">+</button>
+    </div>
+
+    <button type="button" (click)="confirmQty(v)">
+      Add to Cart ({{ qtyInput[keyOf(v)] || 1 }})
+    </button>
   </div>
 </div>

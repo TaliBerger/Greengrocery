@@ -5,13 +5,15 @@ import { About } from './components/about/about';
 import { FruitsGrid } from './components/fruits-grid/fruits-grid';
 import { VegetablesGrid } from './components/vegetables-grid/vegetables-grid';
 
+import { CartPage } from './components/cart-page/cart-page';
+
 export const routes: Routes = [
   { path: '', component: MainPage },
-  { path: 'Vegetables_Section', component: VegetablesGrid },
-  { path: 'Fruits_Section', component: FruitsGrid },
+  { path: 'vegetables', component: VegetablesGrid },
+  { path: 'fruits', component: FruitsGrid },
   { path: 'form', component: AddProduct },
   { path: 'about', component: About },
   { path: 'add-product', component: AddProduct },
-
-
+  { path: 'cart', component: CartPage } 
 ];
+

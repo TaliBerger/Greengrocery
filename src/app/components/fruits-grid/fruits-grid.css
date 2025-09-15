@@ -60,3 +60,24 @@ h1 {
   font-weight: 700;
   color: #2b7a0b;
 }
+.card { position: relative; border: 1px solid #eee; border-radius: 12px; padding: 10px; background: #fff; }
+.content { display: grid; gap: 8px; }
+.qty-popover {
+  position: absolute; right: 10px; top: 10px;
+  background: #fff; border: 1px solid #e5e5e5; border-radius: 12px;
+  padding: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 5;
+  display: grid; gap: 8px; min-width: 210px;
+}
+.qty-popover .row { display: flex; align-items: center; gap: 8px; }
+.qty-popover input { width: 70px; text-align: center; }
+.qty-popover .actions { justify-content: flex-end; }
+.qty-popover .confirm { font-weight: 600; }
+
+.image-wrap img {
+  width: 100%;
+  display: block;
+  border-radius: 10%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}

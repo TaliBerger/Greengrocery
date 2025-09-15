@@ -1,0 +1,46 @@
+h2 {
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+button {
+  margin-left: auto;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ff4d4d;
+  color: white;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #e60000;
+}
+
+.qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.qty-controls input {
+  width: 56px;
+  text-align: center;
+}
+
