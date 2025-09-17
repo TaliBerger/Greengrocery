@@ -30,19 +30,12 @@ export class MainPage implements OnInit, OnDestroy {
   regError = '';
   regOk = '';
 
-  // --- פרטי חנות לפוטר ---
-  storeName = 'GreenMarket';
-  phone = '03-5555555';
-  address = 'השוק 12, תל-אביב';
-  emailTo = 'hello@green.example';
-
-  // --- ניוזלטר בפוטר ---
-  emailNl = '';
-
-  // --- שנה לפוטר (במקום (new Date()) בתבנית) ---
-  year: number = new Date().getFullYear();
+ 
 
   constructor(private router: Router, public auth: AuthService) {}
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
   // Login
   submit() {
@@ -88,16 +81,5 @@ export class MainPage implements OnInit, OnDestroy {
     this.passedHours = Math.floor((timeDifference % (1000 * 3600 * 24)) / (1000 * 3600));
     this.passedMinutes = Math.floor((timeDifference % (1000 * 3600)) / (1000 * 60));
     this.passedSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-  }
-
-  ngOnDestroy() { clearInterval(this.interval); }
-
-  // ----- פוטר: הצטרפות לרשימת תפוצה -----
-  onSubscribe(ev: Event) {
-    ev.preventDefault();
-    if (!this.emailNl.trim()) return;
-    console.log('[Newsletter] subscribe:', this.emailNl);
-    this.emailNl = '';
-    alert('תודה! נעדכן אותך במבצעים טריים 🥦');
   }
 }

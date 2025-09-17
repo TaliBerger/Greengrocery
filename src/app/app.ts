@@ -6,11 +6,12 @@ import { VegetablesGrid } from "./components/vegetables-grid/vegetables-grid";
 import { AddProduct } from "./components/add-product/add-product";
 import { About } from "./components/about/about";
 import { FirstNavbar } from "./components/first-navbar/first-navbar";
+import { FooterComponent } from "./components/footer/footer";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FirstNavbar, RouterOutlet],
+  imports: [FirstNavbar, RouterOutlet, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
