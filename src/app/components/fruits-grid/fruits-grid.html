@@ -4,12 +4,10 @@
 <div class="fruit-grid">
   <div *ngFor="let p of fruits; trackBy: track" class="fruit-item card">
     <div class="image-wrap">
-      <img
-        [src]="p.imageUrl"
-        [alt]="p.name"
-        loading="lazy"
-        (error)="onImgError($event, p)"
-      />
+      <!-- אימוג׳י לפי שם/קטגוריה של p -->
+      <div class="emoji-tile" [attr.aria-label]="p.name">
+        {{ p.emoji || (p.category === 'fruit' ? '🍎' : '🥦') }}
+      </div>
     </div>
 
     <h3>{{ p.name }}</h3>

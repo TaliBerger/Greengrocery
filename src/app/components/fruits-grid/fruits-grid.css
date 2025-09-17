@@ -72,12 +72,13 @@ h1 {
 .qty-popover input { width: 70px; text-align: center; }
 .qty-popover .actions { justify-content: flex-end; }
 .qty-popover .confirm { font-weight: 600; }
-
-.image-wrap img {
-  width: 100%;
-  display: block;
-  border-radius: 10%;
-  max-height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
+.image-wrap {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.emoji-tile {
+  font-size: 72px;
+  line-height: 1;
 }

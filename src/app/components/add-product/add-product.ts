@@ -27,7 +27,7 @@ export class AddProduct implements OnInit {
       action: ['add'], 
       name: ['', Validators.required],
       price: ['', Validators.required],
-      imageUrl: ['', Validators.required],
+      //imageUrl: ['', Validators.required],
       category: ['', Validators.required],
       link: ['', Validators.required],
     });
