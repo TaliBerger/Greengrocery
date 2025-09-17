@@ -62,6 +62,99 @@
   <button (click)="logout()">Logout</button>
 </div>
 
-<div class="footer">
-  <h2>it's the footer</h2>
-</div>
+<!-- FOOTER בתוך הקומפוננטה -->
+<footer class="footer" dir="rtl" aria-label="כותרת תחתונה">
+  <!-- עליון: פס יתרונות -->
+  <div class="topbar">
+    <span>🚚 משלוח מהיום להיום</span>
+    <span>🥗 תוצרת טרייה מדי יום</span>
+    <span>🌿 ללא אותיות קטנות</span>
+  </div>
+
+  <!-- תוכן מרכזי -->
+  <div class="content">
+    <!-- טור 1: מותג + טקסט -->
+    <section class="col brand">
+      <div class="logo">
+        <span class="emoji">🥦</span>
+        <div class="name">
+          <strong>{{ storeName }}</strong>
+          <small>ירקות ופירות טריים עד הבית</small>
+        </div>
+      </div>
+      <p class="tagline">טרי, ירוק ומקומי — כי מגיע לך הכי טוב.</p>
+      <div class="social" aria-label="עקבו אחרינו">
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-.75a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook" title="Facebook">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M13 22v-8h3l1-4h-4V7a2 2 0 0 1 2-2h2V1h-3a5 5 0 0 0-5 5v3H6v4h3v8h4z"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/97235555555" aria-label="WhatsApp" title="WhatsApp">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+            <path d="M20.5 3.5A11 11 0 0 0 3.1 17.6L2 22l4.5-1.2A11 11 0 1 0 20.5 3.5ZM12 20a8 8 0 0 1-4.1-1.1l-.3-.2-2.4.6.6-2.4-.2-.3a8 8 0 1 1 6.4 3.4Zm4.5-5.2c-.3-.2-1.8-.9-2-.9s-.5-.1-.7.2-.8.9-1 .9-.5 0-.9-.2a7.7 7.7 0 0 1-2.3-1.5 8.6 8.6 0 0 1-1.6-2.1c-.2-.4 0-.6.1-.8l.5-.6c.2-.2.3-.5.1-.8-.1-.3-.7-1.6-.9-2.1s-.4-.5-.7-.5h-.6c-.3 0-.8.1-1.1.5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.3 2.8 4.3 6.8 5.9.9.4 1.6.6 2.1.8a4.8 4.8 0 0 0 2.2.1c.7-.1 2.3-1 2.6-1.9s.3-1.7.2-1.9-.2-.3-.5-.4Z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- טור 2: קישורים -->
+    <nav class="col links" aria-label="קישורים מהירים">
+      <h3>קישורים מהירים</h3>
+      <ul>
+        <li><a routerLink="/fruits">פירות 🍎</a></li>
+        <li><a routerLink="/vegetables">ירקות 🥦</a></li>
+        <li><a routerLink="/cart">עגלה 🛒</a></li>
+        <li><a routerLink="/about">אודות</a></li>
+        <li><a routerLink="/contact">צור קשר</a></li>
+      </ul>
+    </nav>
+
+    <!-- טור 3: שעות וכתובת -->
+    <section class="col hours">
+      <h3>শעות פתיחה</h3>
+      <ul class="plain">
+        <li>א׳–ה׳: 08:00–20:00</li>
+        <li>ו׳: 08:00–14:00</li>
+        <li>ש׳: סגור</li>
+      </ul>
+      <h4>כתובת</h4>
+      <p>{{ address }}</p>
+      <p>טלפון: <a [href]="'tel:'+phone">{{ phone }}</a></p>
+      <p>מייל: <a [href]="'mailto:'+emailTo">{{ emailTo }}</a></p>
+    </section>
+
+    <!-- טור 4: ניוזלטר -->
+    <section class="col newsletter">
+      <h3>הצטרפו לרשימת הטריים</h3>
+      <p>קבלו עדכונים על מבצעים וירקות בעונה.</p>
+      <form (submit)="onSubscribe($event)" novalidate>
+        <label class="sr-only" for="nl-email">אימייל</label>
+        <input id="nl-email" [(ngModel)]="emailNl" name="emailNl" type="email" placeholder="you@example.com"
+               required inputmode="email" />
+        <button type="submit">אני בפנים</button>
+      </form>
+      <div class="badges" aria-label="אמצעי תשלום ומשלוח">
+        <span>💳 תשלום מאובטח</span>
+        <span>🧾 חשבונית מס</span>
+        <span>🚚 שליח עד הבית</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- תחתון: זכויות וקישורים משפטיים -->
+  <div class="bottombar">
+    <span>© {{ year }} {{ storeName }} — כל הזכויות שמורות</span>
+    <nav class="legal" aria-label="קישורים משפטיים">
+      <a routerLink="/privacy">פרטיות</a>
+      <span class="dot">•</span>
+      <a routerLink="/terms">תקנון</a>
+      <span class="dot">•</span>
+      <a routerLink="/shipping">משלוחים והחזרות</a>
+    </nav>
+  </div>
+</footer>
