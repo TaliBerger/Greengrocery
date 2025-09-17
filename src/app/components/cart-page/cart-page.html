@@ -3,7 +3,7 @@
 <ng-container *ngIf="(cart?.length ?? 0) > 0; else empty">
   <ul class="cart-list">
     <li *ngFor="let ci of (cart ?? []); let i = index; trackBy: track" class="cart-item">
-      <img [src]="ci.product.imageUrl" [alt]="ci.product.name" width="60" />
+
 
       <div class="details">
         <div class="name">{{ ci.product.name }}</div>

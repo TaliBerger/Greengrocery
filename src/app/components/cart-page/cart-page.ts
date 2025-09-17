@@ -6,7 +6,7 @@ import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-cart-page',
   standalone: true,
-  imports: [CommonModule, NgIf, NgForOf],
+  imports: [CommonModule,CommonModule],
   templateUrl: './cart-page.html',
   styleUrls: ['./cart-page.css']
 })

@@ -1,57 +1,78 @@
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, map, Observable, switchMap, of } from 'rxjs';
-import { User } from '../interfaces/user.interface';
+import { BehaviorSubject, Observable, of, switchMap, map } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-const BASE = 'https://68c4981d81ff90c8e61c9e6a.mockapi.io/api/v1';
+/** טיפוסים */
+export interface SessionUser {
+  id: string;
+  name: string;
+  email: string;
+  role: 'user' | 'admin';
+}
+export interface ApiUser extends SessionUser {
+  password?: string;
+}
+export type NewUser = {
+  name: string;
+  email: string;
+  password: string;
+  role: 'user' | 'admin';
+};
+
+/** כתובת מלאה ל־users (עם /api/v1 ועם /users בסוף) */
+const USERS_URL = 'https://68c4981d81ff90c8e61c9e6a.mockapi.io/api/v1/users';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private state$ = new BehaviorSubject<User | null>(load());
-  user$ = this.state$.asObservable();
+  private readonly STORAGE_KEY = 'session_user';
+  private state$ = new BehaviorSubject<SessionUser | null>(load(this.STORAGE_KEY));
+  readonly user$ = this.state$.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  get user(): User | null { return this.state$.value; }
+  get user(): SessionUser | null { return this.state$.value; }
   get isLoggedIn(): boolean { return !!this.state$.value; }
   get isAdmin(): boolean { return this.state$.value?.role === 'admin'; }
 
-  // התחברות
+  /** התחברות */
   login(email: string, password: string): Observable<boolean> {
-    const params = new HttpParams().set('email', email).set('password', password);
-    return this.http.get<User[]>(`${BASE}/users`, { params }).pipe(
+    const params = new HttpParams().set('email', email);
+    return this.http.get<ApiUser[]>(USERS_URL, { params }).pipe(
+      // 404 ב-MockAPI לפעמים אומר "אין תוצאות" → נתייחס למערך ריק
+      catchError(err => err.status === 404 ? of([] as ApiUser[]) : (() => { throw err; })()),
       map(rows => {
-        const u = rows?.[0] ?? null;
+        const u = rows?.[0];
         if (!u) return false;
-        const safe: User = { id: u.id, name: u.name, email: u.email, role: u.role };
+        if (u.password && u.password !== password) return false;
+        const safe: SessionUser = { id: u.id, name: u.name, email: u.email, role: u.role };
         this.state$.next(safe);
-        localStorage.setItem('session_user', JSON.stringify(safe));
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(safe));
         return true;
       })
     );
   }
 
-  // הרשמה (פשוטה): אם האימייל כבר קיים → false; אחרת יוצר משתמש ומחבר אוטומטית
-  register(
-    name: string,
-    email: string,
-    password: string,
-    role: 'user' | 'admin' = 'user'
-  ): Observable<boolean> {
+  /** הרשמה – תמיד role='user' מהאתר */
+  register(name: string, email: string, password: string): Observable<boolean> {
     const checkParams = new HttpParams().set('email', email);
-
-    return this.http.get<User[]>(`${BASE}/users`, { params: checkParams }).pipe(
+    return this.http.get<ApiUser[]>(USERS_URL, { params: checkParams }).pipe(
+      // 404 = אין משתמש כזה → המשיכי ל-POST
+      catchError(err => err.status === 404 ? of([] as ApiUser[]) : (() => { throw err; })()),
       switchMap(rows => {
-        if (rows && rows.length) {
-          // כבר קיים משתמש עם אותו אימייל
-          return of(false);
-        }
-        const body: User = { name, email, password, role };
-        return this.http.post<User>(`${BASE}/users`, body).pipe(
+        if (rows && rows.length) return of(false); // אימייל כבר קיים
+        const body: NewUser = { name, email, password, role: 'user' };
+        return this.http.post<ApiUser>(USERS_URL, body).pipe(
           map(u => {
-            const safe: User = { id: u.id, name: u.name, email: u.email, role: u.role };
+            const safe: SessionUser = {
+              id: u.id,
+              name: u.name,
+              email: u.email,
+              role: (u.role as 'user' | 'admin') ?? 'user'
+            };
             this.state$.next(safe);
-            localStorage.setItem('session_user', JSON.stringify(safe));
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(safe));
             return true;
           })
         );
@@ -59,14 +80,15 @@ export class AuthService {
     );
   }
 
-  // התנתקות
   logout(): void {
     this.state$.next(null);
-    localStorage.removeItem('session_user');
+    localStorage.removeItem(this.STORAGE_KEY);
   }
 }
 
-function load(): User | null {
-  try { return JSON.parse(localStorage.getItem('session_user') || 'null'); }
-  catch { return null; }
+function load(key: string): SessionUser | null {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as SessionUser) : null;
+  } catch { return null; }
 }

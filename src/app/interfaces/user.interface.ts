@@ -1,3 +1,4 @@
+
 export type UserRole = 'user' | 'admin';
 
 export interface User {
@@ -5,6 +6,6 @@ export interface User {
   name: string;
   email: string;
   password?: string; 
-  role: UserRole;
+  role?: UserRole;
 }
 

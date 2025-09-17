@@ -45,12 +45,6 @@
     <label>Password</label>
     <input type="password" [(ngModel)]="regPassword" name="regPassword" required />
 
-    <label>Role</label>
-    <select [(ngModel)]="regRole" name="regRole">
-      <option value="user">user</option>
-      <option value="admin">admin</option>
-    </select>
-
     <button type="submit" [disabled]="regLoading">Create account</button>
     <div class="error" *ngIf="regError">{{ regError }}</div>
     <div class="ok" *ngIf="regOk">{{ regOk }}</div>
@@ -64,7 +58,6 @@
     <a routerLink="/fruits">Fruits</a>
     <a routerLink="/vegetables">Vegetables</a>
     <a routerLink="/cart">Cart</a>
-    <a *ngIf="auth.isAdmin" routerLink="/add-product">Add Product (Admin)</a>
   </nav>
   <button (click)="logout()">Logout</button>
 </div>

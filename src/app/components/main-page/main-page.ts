@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';              // ל-[(ngModel)]
+import { FormsModule } from '@angular/forms';              
 import { VegetablesGrid } from "../vegetables-grid/vegetables-grid";
 import { FruitsGrid } from "../fruits-grid/fruits-grid";
 import { AuthService } from '../../service/auth.service';
@@ -49,7 +49,7 @@ export class MainPage {
     this.regLoading = true; this.regError = ''; this.regOk = '';
     const n = this.regName.trim(), e = this.regEmail.trim(), p = this.regPassword;
     if (!n || !e || !p) { this.regLoading = false; this.regError = 'All fields are required'; return; }
-    this.auth.register(n, e, p, this.regRole).subscribe(ok => {
+    this.auth.register(n, e, p).subscribe(ok => {
       this.regLoading = false;
       if (!ok) { this.regError = 'Email already exists'; return; }
       this.regOk = 'Account created successfully';

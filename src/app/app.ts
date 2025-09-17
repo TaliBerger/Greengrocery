@@ -10,7 +10,7 @@ import { FirstNavbar } from "./components/first-navbar/first-navbar";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MainPage, FirstNavbar, RouterOutlet],
+  imports: [FirstNavbar, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
