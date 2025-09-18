@@ -8,7 +8,7 @@ function checkAdmin(): true | UrlTree {
   if (auth.isAdmin) return true;
 
   alert(auth.isLoggedIn ? 'Access denied' : 'Please log in to place an order');
-  return router.createUrlTree(['/']); // הפניה נקייה מה-guard
+  return router.createUrlTree(['/']); 
 }
 
 export const adminGuard: CanActivateFn = () => checkAdmin();

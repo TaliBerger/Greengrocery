@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./about.css']
 })
 export class About {
-  // שימי לב ל־/ ולא ל־\
+
   images = [
     'assets/images/about/store1.jpg',
     'assets/images/about/store2.jpg',
@@ -23,9 +23,6 @@ export class About {
       'assets/images/about/store10.jpg',
        'assets/images/about/store11.jpg',
         'assets/images/about/store12.jpg',
-
-
-
   ];
 
   @ViewChild('strip', { static: true }) strip!: ElementRef<HTMLDivElement>;
