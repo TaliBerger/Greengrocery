@@ -15,6 +15,17 @@ export class About {
     'assets/images/about/store2.jpg',
     'assets/images/about/store3.jpg',
     'assets/images/about/store4.jpg',
+    'assets/images/about/store5.jpg',
+    'assets/images/about/store6.jpg',
+    'assets/images/about/store7.jpg',
+    'assets/images/about/store8.jpg',
+     'assets/images/about/store9.jpg',
+      'assets/images/about/store10.jpg',
+       'assets/images/about/store11.jpg',
+        'assets/images/about/store12.jpg',
+
+
+
   ];
 
   @ViewChild('strip', { static: true }) strip!: ElementRef<HTMLDivElement>;

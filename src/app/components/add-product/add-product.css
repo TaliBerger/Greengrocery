@@ -83,3 +83,55 @@ body {
     border-bottom: 2px solid #ddd; 
     padding-bottom: 10px; 
   }
+
+  /* מרווח עליון רק לכפתור השליחה שבטופס */
+form button[type="submit"] {
+  margin-top: 16px; /* הגדילי/הקטיני לפי הצורך */
+}
+/* קופסת מחיר קצת גדולה ויפה יותר */
+.price-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 12px;        /* ↑ גובה/ריפוד גדול יותר */
+  margin-bottom: 20px;
+  max-width: 320px;          /* ↑ מעט רחב יותר (שניי/הגדילי לפי הטעם) */
+}
+
+/* סימן המטבע */
+.price-input .currency-symbol {
+  font-size: 18px;           /* ↑ גדול יותר */
+  color: #555;
+  font-weight: 600;
+}
+
+/* שדה המספר עצמו */
+.price-input input[type="number"]#price {
+  border: none;               /* שלא יהיו מסגרות כפולות */
+  outline: none;
+  width: 100%;
+  font-size: 18px;            /* ↑ טקסט גדול יותר */
+  padding: 6px 0;
+  background: transparent;
+  direction: ltr;             /* ליתר ביטחון */
+}
+
+/* אופציונלי: הסרת החיצים של number */
+.price-input input[type="number"]#price::-webkit-outer-spin-button,
+.price-input input[type="number"]#price::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* החזרת החיצים של number */
+.price-input input[type="number"]#price::-webkit-outer-spin-button,
+.price-input input[type="number"]#price::-webkit-inner-spin-button {
+  -webkit-appearance: auto;
+  margin: initial;
+}
+.price-input input[type="number"]#price {
+  -moz-appearance: auto;
+  appearance: auto;  /* כל הדפדפנים */
+}

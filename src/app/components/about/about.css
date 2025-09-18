@@ -56,3 +56,4 @@ p { margin-bottom: 1rem; }
 /* הסתרת scrollbar לטוב מראה (לא חובה) */
 .carousel-strip::-webkit-scrollbar { height: 8px; }
 .carousel-strip::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 4px; }
+
