@@ -82,3 +82,44 @@ h1 {
   font-size: 72px;
   line-height: 1;
 }
+
+/* הכפתור Add Product (כקישור <a>) */
+.admin-add-btn {
+  border: 2px solid #24b4fb;
+  background-color: #24b4fb;
+  border-radius: 0.9em;
+  cursor: pointer;
+  padding: 0.8em 1.2em 0.8em 1em;
+  transition: all ease-in-out 0.2s;
+  font-size: 16px;
+
+  /* כדי שיעבוד טוב על <a> */
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* תוכן פנימי (אופציונלי) */
+.admin-add-btn span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* אפקט ריחוף */
+.admin-add-btn:hover {
+  background-color: #0071e2;
+  border-color: #0071e2;
+}
+
+/* נגישות */
+.admin-add-btn:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}

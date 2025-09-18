@@ -3,9 +3,14 @@
   <a class="nav-link" routerLink="/vegetables">Vegetables Section</a>
   <a class="nav-link" routerLink="/fruits">Fruits Section</a>
   <a class="nav-link" routerLink="/about">About</a>
-  <a class="nav-link" routerLink="/form">Form</a>
-  <a class="nav-link" routerLink="/cart">Cart@if (cartCount > 0) {
-      <span class="cart-badge">{{ cartCount }}</span>
-    }
+
+  <!-- יוצג רק לאדמין -->
+  <a *ngIf="auth.isAdmin" class="nav-link" routerLink="/add-product">Add Product</a>
+
+  <a class="nav-link" routerLink="/cart">
+    Cart
+    <ng-container *ngIf="cartCount$ | async as count">
+      <span class="cart-badge" *ngIf="count > 0">{{ count }}</span>
+    </ng-container>
   </a>
 </div>

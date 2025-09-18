@@ -1,10 +1,19 @@
-<h1>Vegetables Section</h1>
+<div class="section-header">
+  <h1>Vegetables Section</h1>
+
+  <!-- כפתור רק לאדמין -->
+  <a *ngIf="auth.isAdmin"
+     class="admin-add-btn admin-add-btn--veg"
+     routerLink="/add-product">
+    + Add Product
+  </a>
+</div>
+
 <p>Price per kg</p>
 
 <div class="vegetables-grid">
   <div *ngFor="let v of vegetables; trackBy: track" class="vegetables-item card">
     <div class="image-wrap">
-      <!-- אימוג׳י לפי שם/קטגוריה של v -->
       <div class="emoji-tile" [attr.aria-label]="v.name">
         {{ v.emoji || (v.category === 'fruit' ? '🍎' : '🥦') }}
       </div>
@@ -30,4 +39,3 @@
     </button>
   </div>
 </div>
-

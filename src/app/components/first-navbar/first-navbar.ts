@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { CartService } from '../../service/cart.service';  // ייבוא ה־CartService
+import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { AuthService } from '../../service/auth.service';
+import { CartService } from '../../service/cart.service';
 
 @Component({
   selector: 'app-first-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './first-navbar.html',
   styleUrls: ['./first-navbar.css']
 })
-export class FirstNavbar {
-  cartCount = 0;
+export class FirstNavbar implements OnInit {
+  // חייב להיות public כדי שהטמפלט ייגש אליו
+  constructor(public auth: AuthService, private cart: CartService) {}
 
-  constructor(private cartService: CartService) {}
+  cartCount$!: Observable<number>;
 
-  ngOnInit() {
-    this.cartService.cartCount$.subscribe(count => {
-      this.cartCount = count;
-    });
+  ngOnInit(): void {
+    this.cartCount$ = this.cart.cartCount$; // Observable<number>
+  }
+
+  logout(): void {
+    this.auth.logout();
   }
 }

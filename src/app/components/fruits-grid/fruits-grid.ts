@@ -1,26 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
 import { ProductService } from '../../service/product.service';
 import { CartService } from '../../service/cart.service';
+import { AuthService } from '../../service/auth.service';
 import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-fruits-grid',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './fruits-grid.html',
   styleUrls: ['./fruits-grid.css'],
 })
-export class FruitsGrid {
+export class FruitsGrid implements OnInit {
   fruits: Product[] = [];
   qtyInput: Record<string, number> = {};
 
-  constructor(private ps: ProductService, private cart: CartService) {}
+  constructor(
+    private ps: ProductService,
+    private cart: CartService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.ps.load().subscribe(() => {
       this.fruits = this.ps.getFruits();
-      console.log('Fruits loaded:', this.fruits.length, this.fruits);
     });
   }
 

@@ -1,23 +1,30 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // ← חשוב!
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
 import { ProductService } from '../../service/product.service';
-import { Product } from '../../interfaces/product.interface';
 import { CartService } from '../../service/cart.service';
+import { AuthService } from '../../service/auth.service';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-vegetables-grid',
   standalone: true,
-  imports: [CommonModule], // ← זה מספק *ngFor ו-*ngIf
+  imports: [CommonModule, RouterLink],
   templateUrl: './vegetables-grid.html',
   styleUrls: ['./vegetables-grid.css']
 })
-export class VegetablesGrid {
+export class VegetablesGrid implements OnInit {
   vegetables: Product[] = [];
 
   qtyPickerFor: string | null = null;
   qtyInput: Record<string, number> = {};
 
-  constructor(private ps: ProductService, private cart: CartService) {}
+  constructor(
+    private ps: ProductService,
+    private cart: CartService,
+    public auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.ps.load().subscribe(() => {
@@ -61,11 +68,9 @@ export class VegetablesGrid {
     this.qtyPickerFor = null;
   }
 
-onImgError(ev: Event, p: Product): void {
-  const img = ev.target as HTMLImageElement;
-  img.onerror = null;
-  img.src = `https://picsum.photos/seed/${encodeURIComponent(p.category + '-' + p.name)}/600/450`;
-}
-
-
+  onImgError(ev: Event, p: Product): void {
+    const img = ev.target as HTMLImageElement;
+    img.onerror = null;
+    img.src = `https://picsum.photos/seed/${encodeURIComponent(p.category + '-' + p.name)}/600/450`;
+  }
 }
