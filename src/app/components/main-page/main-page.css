@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-/* ======= השעון – קיים אצלך ======= */
 .clock {
   color: rgb(255, 239, 239);
   font-size: 4rem;
@@ -27,7 +26,7 @@
 }
 
 .clock > h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 
 .clock span {
@@ -115,10 +114,8 @@
 .auth-badge.logged-out{ background: #d32f2f; } /* אדום */
 .auth-badge.logged-in{  background: #2e7d32; } /* ירוק */
 
-
 .sep { border: 0; border-top: 1px solid #eee; margin: 12px 0; }
 .muted { color: #555; font-size: .95rem; }
-
 
 /* מסגרת אנכית */
 :host {
@@ -129,11 +126,9 @@
 
 .card.login#loginBox,
 .card.logged {
-  margin-block: auto;   /* מרכז אנכית */
+  margin-block: auto;
   margin-left: 0 !important;
-  margin-right: auto !important; /* דוחף שמאלה גם ב-RTL */
-  /* אופציונלי: אם יש ריווח גלובלי משמאל שמפריע */
-  /* padding-left: 0 !important; */
+  margin-right: auto !important;
 }
 
 /* ===== Footer styles ===== */
@@ -243,3 +238,107 @@
   .footer .content { grid-template-columns: 1fr; }
   .bottombar { flex-direction: column; gap: 6px; text-align: center; }
 }
+
+/* ---- Login / Register ONLY ---- */
+#loginBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* Login משמאל, Register מימין */
+  gap: 18px;
+  margin: 0 auto;
+  width: min(900px, 95vw);
+}
+
+#loginBox h3 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+/* כל טופס */
+#loginBox form {
+  background-color: #d6cfcf;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;                /* היה 400px – כדי שייכנס בשתי עמודות */
+}
+
+#loginBox label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+#loginBox input[type="text"],
+#loginBox input[type="email"],
+#loginBox input[type="password"],
+#loginBox select {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+#loginBox button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+#loginBox button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#loginBox button[type="submit"]:disabled {
+  background-color: #45a049;
+  cursor: not-allowed;
+}
+
+/* הסתירו את ה-HR הישן בפריסה הדו-עמודתית */
+#loginBox .sep { display: none; }
+
+#loginBox select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 20px;
+  padding-right: 30px;
+}
+
+#loginBox select::-ms-expand {
+  display: none;
+}
+
+/* מובייל: טור אחד */
+@media (max-width: 900px){
+  #loginBox { grid-template-columns: 1fr; width: min(520px, 95vw); }
+}
+/* טפסי התחברות/הרשמה – אחד אחרי השני ויותר למטה */
+#loginBox{
+  display: grid;                 /* ערימה אנכית */
+  grid-template-columns: 1fr;
+  gap: 22px;                     /* ריווח בין הטפסים */
+  width: min(480px, 95vw);       /* רוחב נוח */
+  margin: 72px auto 0;           /* ↓ דוחף למטה ומרכז */
+}
+
+#loginBox .login-col,
+#loginBox .register-col{
+  display: block;                /* בטוח גם אם היו flex */
+}
+
+#loginBox form{
+  width: 100%;                   /* ממלא את הרוחב הנוח */
+}
+
+#loginBox .sep{ display: none; }

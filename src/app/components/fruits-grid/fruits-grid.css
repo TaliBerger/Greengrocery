@@ -123,3 +123,7 @@ h1 {
   outline: 2px solid #93c5fd;
   outline-offset: 2px;
 }
+
+.fruit-grid{
+  background-color: #dbe4df;
+}
