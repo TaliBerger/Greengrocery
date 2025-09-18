@@ -1,5 +1,12 @@
 <div class="section-header">
   <h1>Fruits Section</h1>
+  <!-- Badge סטטוס התחברות קבוע למעלה -->
+<button
+  class="auth-badge"
+  [class.logged-in]="auth.isLoggedIn"
+  [class.logged-out]="!auth.isLoggedIn">
+  {{ auth.isLoggedIn ? 'משתמש מחובר' : 'משתמש לא מחובר' }}
+</button>
 
   <!-- admin buttom-->
   <a *ngIf="auth.isAdmin"
@@ -39,3 +46,4 @@
     </button>
   </div>
 </div>
+

@@ -127,3 +127,19 @@ h1 {
 .fruit-grid{
   background-color: #dbe4df;
 }
+/* ======= תוספת: Badge סטטוס התחברות קבוע למעלה ======= */
+.auth-badge{
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 2000;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 0;
+  color: #fff;
+  font-weight: 700;
+  cursor: default;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+}
+.auth-badge.logged-out{ background: #d32f2f; } /* אדום */
+.auth-badge.logged-in{  background: #2e7d32; } /* ירוק */

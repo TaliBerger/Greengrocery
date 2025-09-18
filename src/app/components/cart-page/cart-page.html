@@ -1,5 +1,11 @@
 <h2>🛒 Shopping Cart</h2>
-
+<!-- Badge סטטוס התחברות קבוע למעלה -->
+<button
+  class="auth-badge"
+  [class.logged-in]="auth.isLoggedIn"
+  [class.logged-out]="!auth.isLoggedIn">
+  {{ auth.isLoggedIn ? 'משתמש מחובר' : 'משתמש לא מחובר' }}
+</button>
 <ng-container *ngIf="(cart?.length ?? 0) > 0; else empty">
   <ul class="cart-list">
     <li *ngFor="let ci of (cart ?? []); let i = index; trackBy: track" class="cart-item">

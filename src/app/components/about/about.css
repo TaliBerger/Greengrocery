@@ -1,5 +1,7 @@
 /* טקסט */
-p { margin-bottom: 1rem; }
+p {
+  margin-bottom: 1rem;
+}
 
 /* מעטפת הקרוסלה והחיצים */
 .carousel-wrap {
@@ -22,8 +24,10 @@ p { margin-bottom: 1rem; }
 /* כרטיס תמונה מוקטן */
 .carousel-card {
   flex: 0 0 auto;
-  width: 220px;             /* ← הקטנת גודל */
-  height: 150px;            /* ← הקטנת גודל */
+  width: 220px;
+  /* ← הקטנת גודל */
+  height: 150px;
+  /* ← הקטנת גודל */
   border-radius: 12px;
   overflow: hidden;
   background: #eee;
@@ -40,7 +44,7 @@ p { margin-bottom: 1rem; }
 /* חיצים */
 .nav {
   border: none;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, .5);
   color: #fff;
   width: 36px;
   height: 36px;
@@ -51,9 +55,16 @@ p { margin-bottom: 1rem; }
   font-size: 20px;
   transition: background .15s ease;
 }
-.nav:hover { background: rgba(0,0,0,.65); }
 
-/* הסתרת scrollbar לטוב מראה (לא חובה) */
-.carousel-strip::-webkit-scrollbar { height: 8px; }
-.carousel-strip::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 4px; }
+.nav:hover {
+  background: rgba(0, 0, 0, .65);
+}
 
+.carousel-strip::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel-strip::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .15);
+  border-radius: 4px;
+}
