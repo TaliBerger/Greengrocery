@@ -26,7 +26,7 @@
     Category is required
   </small>
 
-  <!-- שדות שרלוונטיים רק להוספה -->
+  <!-- שדות להוספה בלבד -->
   <ng-container *ngIf="isAddAction()">
     <label for="price">Price:</label>
     <div class="price-input">
@@ -35,17 +35,6 @@
     </div>
     <small class="error" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('required')">
       Price is required
-    </small>
-
-    <input id="imageUrl" type="text" formControlName="imageUrl" placeholder="assets/images/..." />
-    <small class="error" *ngIf="productForm.get('imageUrl')?.touched && productForm.get('imageUrl')?.hasError('required')">
-      Image URL is required
-    </small>
-
-    <label for="link">Learn More Link:</label>
-    <input id="link" type="text" formControlName="link" placeholder="https://..." />
-    <small class="error" *ngIf="productForm.get('link')?.touched && productForm.get('link')?.hasError('required')">
-      Link is required
     </small>
   </ng-container>
 
