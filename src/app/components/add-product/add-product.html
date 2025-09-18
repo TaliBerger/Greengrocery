@@ -37,7 +37,6 @@
       Price is required
     </small>
 
-    <label for="imageUrl">Image URL:</label>
     <input id="imageUrl" type="text" formControlName="imageUrl" placeholder="assets/images/..." />
     <small class="error" *ngIf="productForm.get('imageUrl')?.touched && productForm.get('imageUrl')?.hasError('required')">
       Image URL is required

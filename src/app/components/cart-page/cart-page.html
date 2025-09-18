@@ -1,4 +1,4 @@
-<h2>🛒 סל הקניות</h2>
+<h2>🛒 Shopping Cart</h2>
 
 <ng-container *ngIf="(cart?.length ?? 0) > 0; else empty">
   <ul class="cart-list">
@@ -7,7 +7,7 @@
 
       <div class="details">
         <div class="name">{{ ci.product.name }}</div>
-        <div class="unit">מחיר ליחידה: {{ ci.product.price | number:'1.2-2' }}$</div>
+        <div class="unit">Unit price {{ ci.product.price | number:'1.2-2' }}$</div>
 
         <!-- עריכת כמות בתוך הסל -->
         <div class="qty-controls">
@@ -22,44 +22,44 @@
         </div>
 
         <div class="line-total">
-          סה״כ שורה: {{ (ci.product.price * ci.qty) | number:'1.2-2' }}$
+          Subtotal {{ (ci.product.price * ci.qty) | number:'1.2-2' }}$
         </div>
       </div>
 
-      <button type="button" class="remove" (click)="removeItem(i)">הסר</button>
+      <button type="button" class="remove" (click)="removeItem(i)">remove</button>
     </li>
   </ul>
 
-  <h3>סה״כ: {{ totalPrice | number:'1.2-2' }}$</h3>
+  <h3>Total: {{ totalPrice | number:'1.2-2' }}$</h3>
 
   <div class="actions">
     <!-- חסימת שליחת הזמנה אם לא מחובר/ת -->
-  <button type="button" (click)="clearCart()">נקה סל</button>
-    <button
-      type="button"
-      class="submit"
-      (click)="submitOrder()"
-      [disabled]="!auth.isLoggedIn || !cart.length"
-      [title]="auth.isLoggedIn ? '' : 'יש להיכנס למערכת לפני שליחת הזמנה'">
-      שליחת ההזמנה
-    </button>
+<button type="button" (click)="clearCart()">נקה סל</button>
+  <button
+    type="button"
+    class="submit"
+    (click)="onPlaceOrderClick()"
+    [disabled]="!cart.length">
+    Place Order
+  </button>
+
   </div>
 
   <!-- הודעת עזר כשלא מחוברים -->
-  <p class="note" *ngIf="!auth.isLoggedIn">
-    יש להיכנס למערכת בדף הבית כדי לבצע הזמנה.
-  </p>
+  <h3 class="note" *ngIf="!auth.isLoggedIn">
+    Please log in to place an order 
+  </h3>
 </ng-container>
 
 <ng-template #empty>
-  <p>הסל ריק</p>
+  <p>shopping cart is empty.</p>
 </ng-template>
 
 <!-- פופאפ הצלחה -->
 <div class="overlay" *ngIf="showSuccess" (click)="closePopup()">
   <div class="popup" (click)="$event.stopPropagation()">
-    <h3>✅ ההזמנה נשלחה בהצלחה</h3>
-    <p *ngIf="orderId">מס' הזמנה: {{ orderId }}</p>
+    <h3>✅ Your order has been placed successfully!</h3>
+    <p *ngIf="orderId">order number:{{ orderId }}</p>
     <button type="button" (click)="closePopup()">סגירה</button>
   </div>
 </div>

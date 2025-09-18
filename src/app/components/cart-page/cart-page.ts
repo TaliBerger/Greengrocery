@@ -74,4 +74,12 @@ export class CartPage {
     this.cartService.setQty(i, Number.isFinite(n) && n > 0 ? n : 1);
     this.cart = this.cartService.getCart();
   }
+
+  onPlaceOrderClick() {
+    if (!this.auth.isLoggedIn) {
+      alert('Please log in to place an order');
+      return;
+    }
+    this.submitOrder();
+  }
 }
