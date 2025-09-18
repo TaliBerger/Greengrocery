@@ -21,7 +21,6 @@ export type NewUser = {
   role: 'user' | 'admin';
 };
 
-/** כתובת מלאה ל־users (עם /api/v1 ועם /users בסוף) */
 const USERS_URL = 'https://68c4981d81ff90c8e61c9e6a.mockapi.io/api/v1/users';
 
 @Injectable({ providedIn: 'root' })
@@ -40,7 +39,6 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     const params = new HttpParams().set('email', email);
     return this.http.get<ApiUser[]>(USERS_URL, { params }).pipe(
-      // 404 ב-MockAPI לפעמים אומר "אין תוצאות" → נתייחס למערך ריק
       catchError(err => err.status === 404 ? of([] as ApiUser[]) : (() => { throw err; })()),
       map(rows => {
         const u = rows?.[0];
