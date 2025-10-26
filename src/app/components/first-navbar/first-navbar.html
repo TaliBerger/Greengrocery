@@ -1,12 +1,12 @@
 <div class="navigation-buttons">
-  <a class="nav-link" routerLink="/">Home</a>
+  <a class="nav-link" routerLink="/mainPage">Home</a>
   <a class="nav-link" routerLink="/vegetables">Vegetables Section</a>
   <a class="nav-link" routerLink="/fruits">Fruits Section</a>
   <a class="nav-link" routerLink="/about">About</a>
 
   <!-- יוצג רק לאדמין -->
   <a *ngIf="auth.isAdmin" class="nav-link" routerLink="/add-product">Add Product</a>
-
+ 
   <a class="nav-link" routerLink="/cart">
     Cart
     <ng-container *ngIf="cartCount$ | async as count">

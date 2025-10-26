@@ -1,18 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AutoForm } from './authForm';
 
-import { MainPage } from './main-page';
-
-describe('MainPage', () => {
-  let component: MainPage;
-  let fixture: ComponentFixture<MainPage>;
+describe('AutoForm', () => {
+  let component: AutoForm;
+  let fixture: ComponentFixture<AutoForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainPage]
-    })
-    .compileComponents();
+      imports: [AutoForm]
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(MainPage);
+    fixture = TestBed.createComponent(AutoForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

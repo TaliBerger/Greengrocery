@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MainPage } from './components/main-page/main-page';
 import { FruitsGrid } from "./components/fruits-grid/fruits-grid";
 import { VegetablesGrid } from "./components/vegetables-grid/vegetables-grid";
 import { AddProduct } from "./components/add-product/add-product";
