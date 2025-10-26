@@ -1,17 +1,19 @@
 .navigation-buttons {
-  background-color: #2e2e2e;       
-  overflow: hidden;
+  background-color: rgb(255,255,255,0.6);       
   border-radius: 12px;
   margin-bottom: 40px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 6px 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 1880px; 
+  bottom: 1px;
 }
 
 .nav-link {
-  color: #f5f5f5;
+  color: rgb(43,43,43,1);
+  size: 20px;
   text-align: center;
   padding: 12px 18px;
   text-decoration: none;
@@ -21,9 +23,7 @@
 }
 
 .nav-link:hover {
-  background-color: #4caf50; 
-  color: #fff;
-  transform: translateY(-2px); 
+  color: rgb(50,125,0,1);
 }
 
 .cart-badge {
