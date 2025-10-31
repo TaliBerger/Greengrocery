@@ -6,14 +6,6 @@
   {{ auth.isLoggedIn ? 'משתמש מחובר' : 'משתמש לא מחובר' }}
 </button>
 
-<div class="clock">
-  <h1>
-    HUNDREDS ARE HELD <span class="hostage">HOSTAGE</span> BY HAMAS
-    07/10/2023<br />
-    {{ passedDays }} days, {{ passedHours }} hours, {{ passedMinutes }} minutes,
-    {{ passedSeconds }} seconds
-  </h1>
-</div>
 
 <!-- כשלא מחובר/ת: התחברות + הרשמה מתחת -->
 <div *ngIf="!auth.isLoggedIn" class="card login" id="loginBox">

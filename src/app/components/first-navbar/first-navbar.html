@@ -1,16 +1,23 @@
 <div class="navigation-buttons">
-  <a class="nav-link" routerLink="/mainPage">Home</a>
-  <a class="nav-link" routerLink="/vegetables">Vegetables Section</a>
-  <a class="nav-link" routerLink="/fruits">Fruits Section</a>
-  <a class="nav-link" routerLink="/about">About</a>
+  <a class="nav-logo">VEGGI</a>
+  
+  <div class="nav-center">
+    <a class="nav-link" routerLink="/mainPage">Home</a>
+    <a class="nav-link" routerLink="/vegetables">Vegetables</a>
+    <a class="nav-link" routerLink="/fruits">Fruits</a>
+    <a class="nav-link" routerLink="/about">About</a>
+    <a *ngIf="auth.isAdmin" class="nav-link" routerLink="/add-product">Add Product</a>
+  </div>
 
-  <!-- יוצג רק לאדמין -->
-  <a *ngIf="auth.isAdmin" class="nav-link" routerLink="/add-product">Add Product</a>
- 
-  <a class="nav-link" routerLink="/cart">
-    Cart
-    <ng-container *ngIf="cartCount$ | async as count">
-      <span class="cart-badge" *ngIf="count > 0">{{ count }}</span>
-    </ng-container>
-  </a>
+  <!-- קונטיינר ימני לעגלה ו-Sign In -->
+  <div class="nav-right">
+    <a class="navbar-cart nav-link" routerLink="/cart">
+      <img src="assets/images/homePage/cart.jpg" alt="Cart" class="cart-icon">
+      <ng-container *ngIf="cartCount$ | async as count">
+        <span class="cart-badge" *ngIf="count > 0">{{ count }}</span>
+      </ng-container>
+    </a>
+
+    <a class="nav-link1" routerLink="/authForm">Sign In</a>
+  </div>
 </div>

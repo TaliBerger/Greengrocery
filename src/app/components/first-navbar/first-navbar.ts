@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../service/auth.service';
@@ -14,16 +14,28 @@ import { CartService } from '../../service/cart.service';
   styleUrls: ['./first-navbar.css']
 })
 export class FirstNavbar implements OnInit {
-  // חייב להיות public כדי שהטמפלט ייגש אליו
-  constructor(public auth: AuthService, private cart: CartService) {}
+  
+  showSignInNextToCart: boolean = false;   // שליטה על מיקום Sign In
+  cartCount$!: Observable<number>;         // כמות פריטים בעגלה
+  auth: any;                               // שירות האימות
 
-  cartCount$!: Observable<number>;
-
-  ngOnInit(): void {
-    this.cartCount$ = this.cart.cartCount$; // Observable<number>
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private cartService: CartService
+  ) {
+    // מאזין לשינויי ניתוב
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const routesWithSignIn = ['/vegetables', '/fruits', '/about'];
+        this.showSignInNextToCart = routesWithSignIn.includes(event.urlAfterRedirects);
+      }
+    });
   }
 
-  logout(): void {
-    this.auth.logout();
+  ngOnInit(): void {
+    // שומר רפרנס לשירותי auth והעגלה
+    this.auth = this.authService;
+    this.cartCount$ = this.cartService.cartCount$;
   }
 }

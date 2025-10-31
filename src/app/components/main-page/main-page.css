@@ -3,6 +3,7 @@ h1{
   height: 102px;
   color: rgba(50, 125, 0, 1);
   margin-top: 250px;
+  padding-left: 200px;
   font-size: 60px;
   font-weight: 450;
 
@@ -12,7 +13,9 @@ p{
     width: 900px;
     height: 68;
     color: rgba(22, 68, 0, 1);
-    font-size: 25px;   
+    font-size: 25px;
+    padding-left: 200px;
+   
 }
 
 .hero-container {
@@ -28,12 +31,14 @@ p{
     position: absolute; 
     background-size: cover; 
     object-fit: cover; 
-    opacity: 1px;
     width: 1905px;
     height: 960px;
     top: -39px;
     left: -3px;
     background-repeat: no-repeat;
+    background-size: cover !important;   
+    opacity: 1 /* אפשר לשנות לפי הצורך */
+
 }
 
 .hero-content {
@@ -45,3 +50,14 @@ p{
     align-items: center; 
 }
 
+.button1{
+    color: rgba(50, 125, 0, 1);
+    width: 218.18px;
+    font-size: 28px;
+    height: 54.55px;
+    border-radius: 29.45px;
+    border: 1.23px;
+    margin-left: 190px;
+    background-color:rgba(158,197,44,0.2);
+
+}

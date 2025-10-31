@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: 'main-page', component: MainPage },
 
   // 1. הגדרת דף הבית תחת הנתיב 'main-page'
-  { path: 'auto-form', component: AutoForm },
+  { path: 'authForm', component: AutoForm },
 
   // 2. הפנייה מחדש (Redirect): ניתוב הנתיב הריק ('/') ל-'main-page'
   { path: '', redirectTo: 'main-page', pathMatch: 'full' },
