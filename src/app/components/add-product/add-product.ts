@@ -33,10 +33,10 @@ export class AddProduct implements OnInit {
     }
 
     this.productForm = this.fb.group({
-      action: ['add', Validators.required], // 'add' | 'delete'
+      action: ['add', Validators.required], 
       name: ['', Validators.required],
       category: ['', Validators.required],
-      price: [null]                         // יהפוך לחובה רק ב-'add'
+      price: [null]                         
     });
 
     // price חובה רק בהוספה
@@ -66,14 +66,16 @@ export class AddProduct implements OnInit {
         return;
       }
 
-      const payload: Omit<Product, 'id'> = {
-        name,
-        category,
-        price: +this.productForm.get('price')!.value,
-        link: this.buildHebrewWikiLink(name),
-        emoji: this.autoEmoji(name, category),
-        image: ''
-      };
+    const payload: Omit<Product, 'id'> = {
+      name,
+      category,
+      price: +this.productForm.get('price')!.value,
+      // יוצר נתיב אוטומטי לפי קטגוריה ושם
+      image: `assets/images/${category}s/${name.toLowerCase()}.jpg`,
+      link: '',
+      emoji: ''
+    };
+
 
       this.productService.addProduct(payload).subscribe({
         next: () => {
@@ -97,39 +99,7 @@ export class AddProduct implements OnInit {
       });
     }
   }
-  buildHebrewWikiLink(name: string): string {
-    throw new Error('Method not implemented.');
-  }
 
 
-  /** אימוג'י אוטומטי לפי שם/קטגוריה (עברית/אנגלית) */
-  private autoEmoji(name: string, category: Category): string {
-    const n = (name || '').toLowerCase();
-    const inName = (...arr: string[]) => arr.some(s => n.includes(s));
-
-    if (category === 'fruit') {
-      if (inName('banana','בננה')) return '🍌';
-      if (inName('apple','תפוח'))  return '🍎';
-      if (inName('orange','תפוז')) return '🍊';
-      if (inName('lemon','לימון')) return '🍋';
-      if (inName('peach','אפרסק')) return '🍑';
-      if (inName('grape','ענב','ענבים')) return '🍇';
-      if (inName('strawberry','תות')) return '🍓';
-      if (inName('watermelon','אבטיח')) return '🍉';
-      if (inName('melon','מלון')) return '🍈';
-      if (inName('mango','מנגו')) return '🥭';
-      return '🍎';
-    } else {
-      if (inName('cucumber','מלפפון')) return '🥒';
-      if (inName('tomato','עגבניה','עגבנייה')) return '🍅';
-      if (inName('carrot','גזר')) return '🥕';
-      if (inName('onion','בצל')) return '🧅';
-      if (inName('garlic','שום')) return '🧄';
-      if (inName('corn','תירס')) return '🌽';
-      if (inName('lettuce','חסה')) return '🥬';
-      if (inName('pepper','פלפל')) return '🌶️';
-      if (inName('broccoli','ברוקולי','כרובית')) return '🥦';
-      return '🥦';
-    }
-  }
+  
 }

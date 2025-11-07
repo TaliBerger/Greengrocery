@@ -50,7 +50,7 @@ p{
     align-items: center; 
 }
 
-.button1{
+.button{
     color: rgba(50, 125, 0, 1);
     width: 218.18px;
     font-size: 28px;
@@ -60,4 +60,9 @@ p{
     margin-left: 190px;
     background-color:rgba(158,197,44,0.2);
 
+}
+
+.button:hover {
+    background-color: rgba(158, 197, 44, 0.4); 
+    cursor: pointer; 
 }

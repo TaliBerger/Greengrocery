@@ -14,6 +14,7 @@ import { AuthService } from '../../service/auth.service';
 })
 export class AutoForm implements OnInit, OnDestroy {
 
+
   // --- Login fields ---
   email = '';
   password = '';
@@ -28,6 +29,7 @@ export class AutoForm implements OnInit, OnDestroy {
   regLoading = false;
   regError = '';
   regOk = '';
+  interval: number | undefined;
 
   constructor(private router: Router, public auth: AuthService) {}
 
@@ -76,26 +78,8 @@ export class AutoForm implements OnInit, OnDestroy {
     alert('You have been logged out successfully.');
   }
 
-  // ----- Timer -----
-  startDate: Date = new Date('2023-10-07T00:00:00');
-  passedDays = 0;
-  passedHours = 0;
-  passedMinutes = 0;
-  passedSeconds = 0;
-  interval: any;
-
   ngOnInit() {
-    this.interval = setInterval(() => {
-      this.updateTime();
-    }, 1000);
+
   }
 
-  updateTime() {
-    const currentDate = new Date();
-    const timeDifference = currentDate.getTime() - this.startDate.getTime();
-    this.passedDays = Math.floor(timeDifference / (1000 * 3600 * 24));
-    this.passedHours = Math.floor((timeDifference % (1000 * 3600 * 24)) / (1000 * 3600));
-    this.passedMinutes = Math.floor((timeDifference % (1000 * 3600)) / (1000 * 60));
-    this.passedSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-  }
 }

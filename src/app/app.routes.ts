@@ -10,31 +10,14 @@ import { MainPage } from './components/main-page/main-page';
 
 export const routes: Routes = [
   { path: 'main-page', component: MainPage },
-
-  // 1. הגדרת דף הבית תחת הנתיב 'main-page'
   { path: 'authForm', component: AutoForm },
-
-  // 2. הפנייה מחדש (Redirect): ניתוב הנתיב הריק ('/') ל-'main-page'
   { path: '', redirectTo: 'main-page', pathMatch: 'full' },
-
   { path: 'vegetables', component: VegetablesGrid },
   { path: 'fruits', component: FruitsGrid },
-  {
-    path: 'add-product',
-    component: AddProduct,
-    canMatch: [adminMatchGuard],
-    canActivate: [adminGuard],
-  },
+  {path: 'add-product',component: AddProduct,canMatch: [adminMatchGuard],canActivate: [adminGuard],},
   { path: 'about', component: About },
   { path: 'cart', component: CartPage },
-  
-  // נתיב קיצור לטופס
-  {
-    path: 'form',
-    redirectTo: 'add-product',
-    pathMatch: 'full'
-  },
-
-  // נתיב אחרון: כל נתיב לא מוכר יופנה לדף הבית
-  { path: '**', redirectTo: 'main-page' }
+  {path: 'form',redirectTo: 'add-product',pathMatch: 'full'},
+  { path: '**', redirectTo: 'main-page' },
+  { path: 'vegetables', component: VegetablesGrid }
 ];
