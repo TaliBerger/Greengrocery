@@ -1,47 +1,33 @@
-<div class="section-header">
-  <h1>Vegetables Section</h1>
-<!-- Badge סטטוס התחברות קבוע למעלה -->
-<button
-  class="auth-badge"
-  [class.logged-in]="auth.isLoggedIn"
-  [class.logged-out]="!auth.isLoggedIn">
-  {{ auth.isLoggedIn ? 'משתמש מחובר' : 'משתמש לא מחובר' }}
-</button>
-  <!-- כפתור רק לאדמין -->
-  <a *ngIf="auth.isAdmin"
-     class="admin-add-btn admin-add-btn--veg"
-     routerLink="/add-product">
-    + Add Product
-  </a>
-</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<h1>Vegetables</h1>
+<div class="vegetables">
+  <div class="vegetables-grid">
+    <div *ngFor="let v of vegetables; trackBy: track" class="vegetables-item card">
 
-<p>Price per kg</p>
-
-<div class="vegetables-grid">
-  <div *ngFor="let v of vegetables; trackBy: track" class="vegetables-item card">
-    <div class="image-wrap">
-      <div class="emoji-tile" [attr.aria-label]="v.name">
-        {{ v.emoji || (v.category === 'fruit' ? '🍎' : '🥦') }}
+      <!-- עטיפת תמונה -->
+      <div class="image-wrap">
+        <img [src]="v.image" [alt]="v.name" class="veg-image" (error)="onImgError($event, v)" />
       </div>
+
+      <h3>{{ v.name }}</h3>
+      <p class="price">{{ v.price | number:'1.2-2' }}$</p>
+
+      <div class="qty-overlay">
+        <button class="min"type="button" (click)="decQty(v)">−</button>
+        <input
+          type="number"
+          [value]="qtyInput[keyOf(v)] || 1"
+          min="1"
+          (input)="onQtyInput(v, $any($event.target).value)"
+        />
+        <button type="button" (click)="incQty(v)">+</button>
+      </div>
+
+      <button class="add-button"  type="button" (click)="confirmQty(v)">
+        Add ({{ qtyInput[keyOf(v)] || 1 }})
+      </button>
     </div>
-
-    <h3>{{ v.name }}</h3>
-    <p class="price">{{ v.price | number:'1.2-2' }}$</p>
-    <a [href]="v.link" target="_blank" rel="noopener noreferrer">Learn more</a>
-
-    <div class="qty-overlay">
-      <button type="button" (click)="decQty(v)">−</button>
-      <input
-        type="number"
-        [value]="qtyInput[keyOf(v)] || 1"
-        min="1"
-        (input)="onQtyInput(v, $any($event.target).value)"
-      />
-      <button type="button" (click)="incQty(v)">+</button>
-    </div>
-
-    <button type="button" (click)="confirmQty(v)">
-      Add to Cart ({{ qtyInput[keyOf(v)] || 1 }})
-    </button>
   </div>
 </div>

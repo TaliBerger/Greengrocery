@@ -13,7 +13,6 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./authForm.css']
 })
 export class AutoForm implements OnInit, OnDestroy {
-  goToForm() { throw new Error('Method not implemented.'); }
 
   // --- Login fields ---
   email = '';
@@ -30,48 +29,65 @@ export class AutoForm implements OnInit, OnDestroy {
   regError = '';
   regOk = '';
 
- 
-
   constructor(private router: Router, public auth: AuthService) {}
+
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    clearInterval(this.interval);
   }
 
   // Login
   submit() {
-    this.loading = true; this.error = '';
+    this.loading = true;
+    this.error = '';
     this.auth.login(this.email.trim(), this.password).subscribe(ok => {
       this.loading = false;
-      if (!ok) { this.error = 'Email or password is incorrect'; return; }
+      if (!ok) {
+        this.error = 'Email or password is incorrect';
+        return;
+      }
     });
   }
 
-  // Register (creates user in MockAPI, then logs in automatically)
+  // Register
   submitRegister() {
-    this.regLoading = true; this.regError = ''; this.regOk = '';
+    this.regLoading = true;
+    this.regError = '';
+    this.regOk = '';
     const n = this.regName.trim(), e = this.regEmail.trim(), p = this.regPassword;
-    if (!n || !e || !p) { this.regLoading = false; this.regError = 'All fields are required'; return; }
+    if (!n || !e || !p) {
+      this.regLoading = false;
+      this.regError = 'All fields are required';
+      return;
+    }
     this.auth.register(n, e, p).subscribe(ok => {
       this.regLoading = false;
-      if (!ok) { this.regError = 'Email already exists'; return; }
+      if (!ok) {
+        this.regError = 'Email already exists';
+        return;
+      }
       this.regOk = 'Account created successfully';
       this.regName = this.regEmail = this.regPassword = '';
       this.regRole = 'user';
     });
   }
 
-  logout() { this.auth.logout(); }
+  logout() {
+    this.auth.logout();
+    alert('You have been logged out successfully.');
+  }
 
-  // ----- השעון -----
+  // ----- Timer -----
   startDate: Date = new Date('2023-10-07T00:00:00');
-  passedDays: number = 0;
-  passedHours: number = 0;
-  passedMinutes: number = 0;
-  passedSeconds: number = 0;
+  passedDays = 0;
+  passedHours = 0;
+  passedMinutes = 0;
+  passedSeconds = 0;
   interval: any;
 
   ngOnInit() {
-    this.interval = setInterval(() => { this.updateTime(); }, 1000);
+    this.interval = setInterval(() => {
+      this.updateTime();
+    }, 1000);
   }
 
   updateTime() {

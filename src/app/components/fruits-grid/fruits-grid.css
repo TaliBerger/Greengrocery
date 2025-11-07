@@ -1,145 +1,145 @@
-/* בסיס טיפוגרפיה – אם כבר קיים גלובלי, אפשר להסיר מכאן */
+/* ===== בסיס טיפוגרפיה ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Noto Sans Mono", serif;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
+  font-family: 'Inter';
+
 }
 
-/* גריד לפירות */
+/* ===== גריד לפירות ===== */
 .fruit-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* אם תרצי רספונסיבי יותר: auto-fill/minmax */
-  gap: 3em;
-  margin: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2.5em;
+  margin: 20px auto;
+  padding: 20px;
   justify-items: center;
-  align-items: center;
+  align-items: start;
+  border-radius: 20px;
 }
 
-/* כרטיס פרי */
+/* ===== כרטיס פרי ===== */
 .fruit-item {
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  background-color: #f0f0f0;
-  border-radius: 25px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  background-color:  rgba(248, 248, 248, 1);
   text-align: center;
-}
-
-.fruit-item img {
-  border-radius: 10%;
+  padding: 16px;
   width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
+  max-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .fruit-item:hover {
-  background-color: #b9b8b8;
-  transform: scale(1.2);
+  transform: translateY(-8px);
+  box-shadow: 0 6px 20px rgba(60, 140, 6, 0.25);
   cursor: pointer;
 }
 
-/* כותרות */
-h1 {
-  text-align: center;
-  margin: 20px auto;
-  padding: 10px;
-  font-size: 3rem;
+/* ===== תמונת פרי ===== */
+.fruit-item img {
   width: 100%;
-  background-color: rgb(110, 187, 117);
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-/* מחיר מודגש */
+.fruit-item:hover img {
+  transform: scale(1.05);
+  border-color: rgba(60, 140, 6, 0.8);
+}
+
+/* ===== כותרת ===== */
+
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* רווח בין הכותרת לפסים */
+  color: rgba(50, 125, 0, 1);
+  font-family: 'Inter', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  text-align: center;
+  margin: 50px 0;
+  position: relative;
+}
+
+h1::before,
+h1::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #3C8C06 99.99%);
+  max-width: 300px; /* כדי שהפסים לא יהיו אינסופיים */
+}
+
+
+
+/* ===== מחיר ===== */
 .price {
   font-weight: 700;
-  color: #2b7a0b;
-}
-.card { position: relative; border: 1px solid #eee; border-radius: 12px; padding: 10px; background: #fff; }
-.content { display: grid; gap: 8px; }
-.qty-popover {
-  position: absolute; right: 10px; top: 10px;
-  background: #fff; border: 1px solid #e5e5e5; border-radius: 12px;
-  padding: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 5;
-  display: grid; gap: 8px; min-width: 210px;
-}
-.qty-popover .row { display: flex; align-items: center; gap: 8px; }
-.qty-popover input { width: 70px; text-align: center; }
-.qty-popover .actions { justify-content: flex-end; }
-.qty-popover .confirm { font-weight: 600; }
-.image-wrap {
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.emoji-tile {
-  font-size: 72px;
-  line-height: 1;
+  color: #000000;
+  font-size: 18px;
+  margin: 8px 0;
 }
 
-/* הכפתור Add Product (כקישור <a>) */
-.admin-add-btn {
-  border: 2px solid #24b4fb;
-  background-color: #24b4fb;
-  border-radius: 0.9em;
+.qty-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.qty-overlay button {
+  background-color: #3c8c06;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
-  padding: 0.8em 1.2em 0.8em 1em;
-  transition: all ease-in-out 0.2s;
+  transition: background-color 0.2s ease;
+}
+
+.qty-overlay button:hover {
+  background-color: #2b7004;
+}
+
+.qty-overlay input {
+  width: 45px;
+  height: 32px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   font-size: 16px;
-
-  /* כדי שיעבוד טוב על <a> */
-  display: inline-flex;
-  align-items: center;
-  gap: .4em;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-  line-height: 1;
 }
 
-/* תוכן פנימי (אופציונלי) */
-.admin-add-btn span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-weight: 600;
+.add-button{
+  width: 160px;
+  height: 33.062461853027344px;
+  margin-left: 28px;
+  opacity: 1;
+  background: rgba(158, 197, 44, 0.2);
+  height: 33.062461853027344;
+  gap: 7.53px;
+  opacity: 1;
+  border-radius: 9.44px;
+  border-width: 0px;
+  padding-top: 5.53px;
+  padding-right: 30.12px;
+  padding-bottom: 7.53px;
+  padding-left: 30.12px;
+  color:rgba(50, 125, 0, 1);
+  font-size: 19.06px;
+  font-weight: 550 ;
 }
-
-/* אפקט ריחוף */
-.admin-add-btn:hover {
-  background-color: #0071e2;
-  border-color: #0071e2;
-}
-
-/* נגישות */
-.admin-add-btn:focus-visible {
-  outline: 2px solid #93c5fd;
-  outline-offset: 2px;
-}
-
-.fruit-grid{
-  background-color: #dbe4df;
-}
-/* ======= תוספת: Badge סטטוס התחברות קבוע למעלה ======= */
-.auth-badge{
-  position: fixed;
-  top: 8px;
-  right: 8px;
-  z-index: 2000;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 0;
-  color: #fff;
-  font-weight: 700;
-  cursor: default;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18);
-}
-.auth-badge.logged-out{ background: #d32f2f; } /* אדום */
-.auth-badge.logged-in{  background: #2e7d32; } /* ירוק */

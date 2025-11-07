@@ -1,71 +1,92 @@
-<h2>🛒 Shopping Cart</h2>
-<!-- Badge סטטוס התחברות קבוע למעלה -->
-<button
-  class="auth-badge"
-  [class.logged-in]="auth.isLoggedIn"
-  [class.logged-out]="!auth.isLoggedIn">
-  {{ auth.isLoggedIn ? 'משתמש מחובר' : 'משתמש לא מחובר' }}
-</button>
+<h1>Cart</h1>
+
 <ng-container *ngIf="(cart?.length ?? 0) > 0; else empty">
-  <ul class="cart-list">
-    <li *ngFor="let ci of (cart ?? []); let i = index; trackBy: track" class="cart-item">
+  <div class="cart-container">
+    <ul class="cart-list">
+      <li *ngFor="let ci of (cart ?? []); let i = index; trackBy: track" class="cart-item">
 
-
-      <div class="details">
-        <div class="name">{{ ci.product.name }}</div>
-        <div class="unit">Unit price {{ ci.product.price | number:'1.2-2' }}$</div>
-
-        <!-- עריכת כמות בתוך הסל -->
-        <div class="qty-controls">
-          <button type="button" (click)="decrease(i)">−</button>
-          <input
-            type="number"
-            [value]="ci.qty"
-            min="1"
-            (input)="setQty(i, $any($event.target).value)"
+        <!-- צד שמאל: תמונה -->
+        <div class="left-section">
+          <img 
+            *ngIf="ci.product.image" 
+            [src]="ci.product.image" 
+            alt="{{ ci.product.name }}" 
+            class="product-thumb"
           />
-          <button type="button" (click)="increase(i)">+</button>
         </div>
 
-        <div class="line-total">
-          Subtotal {{ (ci.product.price * ci.qty) | number:'1.2-2' }}$
-        </div>
-      </div>
+        <!-- אמצע: פרטי מוצר + שליטה בכמות -->
+        <div class="middle-section">
+          <div class="details">
+            <div class="name">{{ ci.product.name }}</div>
+            <div class="unit">
+              Unit price {{ ci.product.price | number:'1.2-2' }}$
+            </div>
+          </div>
 
-      <button type="button" class="remove" (click)="removeItem(i)">remove</button>
-    </li>
-  </ul>
+          <div class="qty-controls">
+            <button type="button" (click)="decrease(i)">−</button>
+            <input
+              type="number"
+              [value]="ci.qty"
+              min="1"
+              (input)="setQty(i, $any($event.target).value)"
+            />
+            <button type="button" (click)="increase(i)">+</button>
+          </div>
+        </div>
+
+        <!-- צד ימין: כפתור מחיקה מעל מחיר -->
+        <div class="right-section">
+          <img 
+            src="assets/images/cart/trush.jpg" 
+            alt="Remove" 
+            class="remove-btn" 
+            (click)="removeItem(i)"
+            style="cursor: pointer; width: 24px; height: 24px; margin-bottom: 10px;"
+          />
+          <div class="line-total">
+            Subtotal {{ (ci.product.price * ci.qty) | number:'1.2-2' }}$
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+
+  <!-- הודעה כשלא מחוברים -->
+  <h3 class="note" *ngIf="!auth.isLoggedIn">
+    Please log in to place an order 
+  </h3>
 
   <h3>Total: {{ totalPrice | number:'1.2-2' }}$</h3>
 
   <div class="actions">
-    <!-- חסימת שליחת הזמנה אם לא מחובר/ת -->
-<button type="button" (click)="clearCart()">נקה סל</button>
-  <button
-    type="button"
-    class="submit"
-    (click)="onPlaceOrderClick()"
-    [disabled]="!cart.length">
-    Place Order
-  </button>
-
+    <button type="button" (click)="clearCart()">Clear Cart</button>
+    <button
+      type="button"
+      class="submit"
+      (click)="onPlaceOrderClick()"
+      [disabled]="!cart.length">
+      Place Order
+    </button>
   </div>
 
-  <!-- הודעת עזר כשלא מחוברים -->
-  <h3 class="note" *ngIf="!auth.isLoggedIn">
-    Please log in to place an order 
-  </h3>
 </ng-container>
 
+<!-- תבנית ריקה -->
 <ng-template #empty>
-  <p>shopping cart is empty.</p>
+  <div id="empty-container">
+    <h2>shoping cart is empty</h2>
+  </div>
 </ng-template>
 
 <!-- פופאפ הצלחה -->
 <div class="overlay" *ngIf="showSuccess" (click)="closePopup()">
   <div class="popup" (click)="$event.stopPropagation()">
+    <img class="logo" src="assets/images/cart/logo.jpg" alt="Success Logo">
     <h3>✅ Your order has been placed successfully!</h3>
-    <p *ngIf="orderId">order number:{{ orderId }}</p>
+    <p *ngIf="orderId">Order number: {{ orderId }}</p>
     <button type="button" (click)="closePopup()">סגירה</button>
   </div>
 </div>

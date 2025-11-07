@@ -10,7 +10,7 @@ import { Product } from '../../interfaces/product.interface';
 @Component({
   selector: 'app-fruits-grid',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './fruits-grid.html',
   styleUrls: ['./fruits-grid.css'],
 })

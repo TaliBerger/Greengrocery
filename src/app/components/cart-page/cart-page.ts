@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { CommonModule, NgIf, NgForOf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { CartService, CartItem } from '../../service/cart.service';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-cart-page',
   standalone: true,
-  imports: [CommonModule,CommonModule],
+  imports: [CommonModule],
   templateUrl: './cart-page.html',
   styleUrls: ['./cart-page.css']
 })
 export class CartPage {
   cart: CartItem[] = [];
-  
   showSuccess = false;
   orderId: string | null = null;
 
@@ -25,7 +24,7 @@ export class CartPage {
     this.cart = this.cartService.getCart();
   }
 
-  // trackBy לפתרון האזהרה/ביצועים
+  // trackBy לשיפור ביצועים
   track = (_: number, ci: CartItem) => ci.product.name;
 
   removeItem(i: number) {
@@ -43,21 +42,21 @@ export class CartPage {
   }
 
   submitOrder() {
-    // חסימה אם לא מחובר/ת
     if (!this.auth.isLoggedIn) {
       alert('יש להיכנס למערכת לפני שליחת הזמנה');
       return;
     }
     if (!this.cart.length) return;
 
-    // פופ־אפ הצלחה + ניקוי סל
     this.orderId = Date.now().toString(36).toUpperCase();
     this.cartService.clearCart();
     this.cart = [];
     this.showSuccess = true;
   }
 
-  closePopup() { this.showSuccess = false; }
+  closePopup() {
+    this.showSuccess = false;
+  }
 
   increase(i: number) {
     this.cartService.increase(i);
@@ -81,5 +80,9 @@ export class CartPage {
       return;
     }
     this.submitOrder();
+  }
+
+  showEmptyAlert() {
+    alert('shopping cart is empty');
   }
 }

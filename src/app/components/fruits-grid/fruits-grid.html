@@ -1,29 +1,13 @@
-<div class="section-header">
-  <h1>Fruits Section</h1>
-  <!-- Badge סטטוס התחברות קבוע למעלה -->
-<button
-  class="auth-badge"
-  [class.logged-in]="auth.isLoggedIn"
-  [class.logged-out]="!auth.isLoggedIn">
-  {{ auth.isLoggedIn ? 'משתמש מחובר' : 'משתמש לא מחובר' }}
-</button>
-
-  <!-- admin buttom-->
-  <a *ngIf="auth.isAdmin"
-     class="admin-add-btn admin-add-btn--fruit"
-     routerLink="/add-product">
-    + Add Product
-  </a>
-</div>
-
-<p>Price per kg</p>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<h1>Fruits</h1>
 <div class="fruit-grid">
   <div *ngFor="let p of fruits; trackBy: track" class="fruit-item card">
     <div class="image-wrap">
-      <div class="emoji-tile" [attr.aria-label]="p.name">
-        {{ p.emoji || (p.category === 'fruit' ? '🍎' : '🥦') }}
-      </div>
+      <img [src]="p.image || 'assets/images/default-fruit.jpg'" 
+           [alt]="p.name" 
+           class="fruit-image" />
     </div>
 
     <h3>{{ p.name }}</h3>
@@ -41,9 +25,8 @@
       <button type="button" (click)="incQty(p)">+</button>
     </div>
 
-    <button type="button" (click)="confirmQty(p)">
-      Add to Cart ({{ qtyInput[keyOf(p)] || 1 }})
+    <button class="add-button" type="button" (click)="confirmQty(p)">
+      Add ({{ qtyInput[keyOf(p)] || 1 }})
     </button>
   </div>
 </div>
-

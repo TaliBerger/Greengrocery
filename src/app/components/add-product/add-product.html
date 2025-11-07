@@ -1,45 +1,47 @@
-<h1>Add or Delete a Product</h1>
+<div class="form-wrapper">
+  <h1>Add or Delete a Product</h1>
 
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
-  <!-- פעולה -->
-  <label for="action">Action:</label>
-  <select id="action" formControlName="action">
-    <option value="add">Add Product</option>
-    <option value="delete">Delete Product</option>
-  </select>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- פעולה -->
+    <label for="action">Action:</label>
+    <select id="action" formControlName="action">
+      <option value="add">Add Product</option>
+      <option value="delete">Delete Product</option>
+    </select>
 
-  <!-- שם מוצר -->
-  <label for="name">Product Name:</label>
-  <input id="name" type="text" formControlName="name" autocomplete="off" />
-  <small class="error" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.hasError('required')">
-    Name is required
-  </small>
-
-  <!-- קטגוריה -->
-  <label for="category">Category:</label>
-  <select id="category" formControlName="category">
-    <option value="">-- Select --</option>
-    <option value="fruit">Fruit</option>
-    <option value="vegetable">Vegetable</option>
-  </select>
-  <small class="error" *ngIf="productForm.get('category')?.touched && productForm.get('category')?.hasError('required')">
-    Category is required
-  </small>
-
-  <!-- שדות להוספה בלבד -->
-  <ng-container *ngIf="isAddAction()">
-    <label for="price">Price:</label>
-    <div class="price-input">
-      <span class="currency-symbol">$</span>
-      <input id="price" formControlName="price" type="number" inputmode="decimal" step="0.01" min="0.01" dir="ltr" />
-    </div>
-    <small class="error" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('required')">
-      Price is required
+    <!-- שם מוצר -->
+    <label for="name">Product Name:</label>
+    <input id="name" type="text" formControlName="name" autocomplete="off" />
+    <small class="error" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.hasError('required')">
+      Name is required
     </small>
-  </ng-container>
 
-  <!-- כפתור -->
-  <button type="submit" [disabled]="isAddAction() && productForm.invalid">
-    {{ isAddAction() ? 'Add Product' : 'Delete Product' }}
-  </button>
-</form>
+    <!-- קטגוריה -->
+    <label for="category">Category:</label>
+    <select id="category" formControlName="category">
+      <option value="">-- Select --</option>
+      <option value="fruit">Fruit</option>
+      <option value="vegetable">Vegetable</option>
+    </select>
+    <small class="error" *ngIf="productForm.get('category')?.touched && productForm.get('category')?.hasError('required')">
+      Category is required
+    </small>
+
+    <!-- שדות להוספה בלבד -->
+    <ng-container *ngIf="isAddAction()">
+      <label for="price">Price:</label>
+      <div class="price-input">
+        <span class="currency-symbol">$</span>
+        <input id="price" formControlName="price" type="number" inputmode="decimal" step="0.01" min="0.01" dir="ltr" />
+      </div>
+      <small class="error" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.hasError('required')">
+        Price is required
+      </small>
+    </ng-container>
+
+    <!-- כפתור -->
+    <button type="submit" [disabled]="isAddAction() && productForm.invalid">
+      {{ isAddAction() ? 'Add Product' : 'Delete Product' }}
+    </button>
+  </form>
+</div>

@@ -1,65 +1,189 @@
-h2 {
-  margin-bottom: 15px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
+h1 {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 20px; 
+  color: rgba(50, 125, 0, 1);
+  font-family: 'Inter', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  text-align: center;
+  margin: 50px 0;
+  position: relative;
+}
+
+h1::before,
+h1::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #3C8C06 99.99%);
+  max-width: 300px; 
+}
+
+#empty-container{
+  color: #ff0000;
+  text-align: center;      /* מרכז את הטקסט */
+
+}
+
+.remove-btn{
+  width: 40px !important;
+  height: 45px !important;
+  margin-right: 40px !important;
+}
+
+.cart-item {
+  width: 100%;
+  max-width: 1700px;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  box-sizing: border-box;
+  direction: ltr;
+  margin: 20px auto;
+}
+
+/* תמונה בצד שמאל */
+.left-section {
+  flex: 0 0 120px; /* רוחב קבוע */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-thumb {
+  width: 120px;
+  height: 117px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* פרטי המוצר באמצע */
+.middle-section {
+  flex: 1; /* תופס את רוב השורה */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 10px;
-  margin: 8px 0;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: #fafafa;
+  padding: 0 20px;
 }
 
-button {
-  margin-left: auto;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #ff4d4d;
-  color: white;
-  transition: 0.3s;
+.details {
+  font-size: 24px;
+  color: #333;
 }
 
-button:hover {
-  background-color: #e60000;
+.unit {
+  font-size: 18px;
+  color: #666;
 }
 
 .qty-controls {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 10px;
 }
+
+.qty-controls button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.qty-controls button:hover {
+  background-color: #e0e0e0;
+}
+
 .qty-controls input {
-  width: 56px;
+  width: 45px;
   text-align: center;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* צד ימין: מחיר וכפתור מחיקה */
+.right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+}
+
+.line-total {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+button.remove {
+  background-color: #e60000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button.remove:hover {
+  background-color: #c40000;
+}
+
+h3,
+.actions,
+.note {
+  margin-right: 0;
+  text-align: center; /
+
 }
 
 .note{
   color: #e60000;
 }
-/* ======= תוספת: Badge סטטוס התחברות קבוע למעלה ======= */
-.auth-badge{
-  position: fixed;
-  top: 8px;
-  right: 8px;
-  z-index: 2000;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 0;
-  color: #fff;
-  font-weight: 700;
-  cursor: default;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; 
 }
-.auth-badge.logged-out{ background: #d32f2f; } /* אדום */
-.auth-badge.logged-in{  background: #2e7d32; } /* ירוק */
+
+.actions button {
+  padding: 10px 20px;       
+  font-size: 16px;         
+  border: none;           
+  border-radius: 6px;      
+  cursor: pointer;          
+}
+
+/* כפתור נקה סל */
+.actions button:first-child {
+  background-color: #f0f0f0;  /* אפור בהיר */
+  color: #333;
+}
+
+/* כפתור Place Order */
+.actions button.submit {
+  background-color: #32a852;  /* ירוק בהיר ונעים */
+  color: white;
+}
+
+.actions button:hover {
+  opacity: 0.9; 

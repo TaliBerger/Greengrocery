@@ -71,7 +71,8 @@ export class AddProduct implements OnInit {
         category,
         price: +this.productForm.get('price')!.value,
         link: this.buildHebrewWikiLink(name),
-        emoji: this.autoEmoji(name, category)
+        emoji: this.autoEmoji(name, category),
+        image: ''
       };
 
       this.productService.addProduct(payload).subscribe({
@@ -96,12 +97,10 @@ export class AddProduct implements OnInit {
       });
     }
   }
-
-  /** קישור ויקיפדיה בעברית מתוך השם */
-  private buildHebrewWikiLink(name: string): string {
-    const clean = (name || '').trim().replace(/\s+/g, ' ');
-    return clean ? `https://he.wikipedia.org/wiki/${encodeURIComponent(clean)}` : '';
+  buildHebrewWikiLink(name: string): string {
+    throw new Error('Method not implemented.');
   }
+
 
   /** אימוג'י אוטומטי לפי שם/קטגוריה (עברית/אנגלית) */
   private autoEmoji(name: string, category: Category): string {
