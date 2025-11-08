@@ -17,6 +17,7 @@ export const routes: Routes = [
   { path: 'add-product', component: AddProduct, canMatch: [adminMatchGuard], canActivate: [adminGuard] },
   { path: 'about', component: About },
   { path: 'cart', component: CartPage },
-  { path: 'form', redirectTo: 'add-product', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main-page' }
+  {path: 'form',redirectTo: 'add-product',pathMatch: 'full'},
+  { path: '**', redirectTo: 'main-page' },
+  { path: 'vegetables', component: VegetablesGrid }
 ];
