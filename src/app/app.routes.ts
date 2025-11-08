@@ -18,6 +18,5 @@ export const routes: Routes = [
   { path: 'about', component: About },
   { path: 'cart', component: CartPage },
   {path: 'form',redirectTo: 'add-product',pathMatch: 'full'},
-  { path: '**', redirectTo: 'main-page' },
-  { path: 'vegetables', component: VegetablesGrid }
+  { path: '**', redirectTo: 'main-page' }
 ];
