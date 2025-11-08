@@ -5,10 +5,10 @@ import { App } from './app/app';
 import { routes } from './app/app.routes'; 
 
 bootstrapApplication(App, {
-  ...appConfig, 
+  ...appConfig,
   providers: [
-    ...(appConfig.providers || []), 
-    provideRouter(routes, withHashLocation()) 
+    ...(appConfig.providers || []),
+    provideRouter(routes, withHashLocation())
   ]
 })
 .catch((err) => console.error(err));

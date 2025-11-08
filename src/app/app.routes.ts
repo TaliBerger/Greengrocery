@@ -9,14 +9,14 @@ import { adminGuard, adminMatchGuard } from './guards/admin.guard';
 import { MainPage } from './components/main-page/main-page';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'main-page', pathMatch: 'full' },
   { path: 'main-page', component: MainPage },
   { path: 'authForm', component: AutoForm },
-  { path: '', redirectTo: 'main-page', pathMatch: 'full' },
   { path: 'vegetables', component: VegetablesGrid },
   { path: 'fruits', component: FruitsGrid },
-  {path: 'add-product',component: AddProduct,canMatch: [adminMatchGuard],canActivate: [adminGuard],},
+  { path: 'add-product', component: AddProduct, canMatch: [adminMatchGuard], canActivate: [adminGuard] },
   { path: 'about', component: About },
   { path: 'cart', component: CartPage },
-  {path: 'form',redirectTo: 'add-product',pathMatch: 'full'},
+  { path: 'form', redirectTo: 'add-product', pathMatch: 'full' },
   { path: '**', redirectTo: 'main-page' }
 ];
