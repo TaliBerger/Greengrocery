@@ -1,11 +1,9 @@
 <h1>Cart</h1>
-
 <ng-container *ngIf="(cart?.length ?? 0) > 0; else empty">
   <div class="cart-container">
     <ul class="cart-list">
       <li *ngFor="let ci of (cart ?? []); let i = index; trackBy: track" class="cart-item">
 
-        <!-- צד שמאל: תמונה -->
         <div class="left-section">
           <img 
             *ngIf="ci.product.image" 
@@ -15,7 +13,6 @@
           />
         </div>
 
-        <!-- אמצע: פרטי מוצר + שליטה בכמות -->
         <div class="middle-section">
           <div class="details">
             <div class="name">{{ ci.product.name }}</div>
@@ -36,7 +33,6 @@
           </div>
         </div>
 
-        <!-- צד ימין: כפתור מחיקה מעל מחיר -->
         <div class="right-section">
           <img 
             src="assets/images/cart/trush.jpg" 
@@ -54,7 +50,6 @@
     </ul>
   </div>
 
-  <!-- הודעה כשלא מחוברים -->
   <h3 class="note" *ngIf="!auth.isLoggedIn">
     Please log in to place an order 
   </h3>
@@ -74,14 +69,12 @@
 
 </ng-container>
 
-<!-- תבנית ריקה -->
 <ng-template #empty>
   <div id="empty-container">
     <h2>shoping cart is empty</h2>
   </div>
 </ng-template>
 
-<!-- פופאפ הצלחה -->
 <div class="overlay" *ngIf="showSuccess" (click)="closePopup()">
   <div class="popup" (click)="$event.stopPropagation()">
     <img class="logo" src="assets/images/cart/logo.jpg" alt="Success Logo">

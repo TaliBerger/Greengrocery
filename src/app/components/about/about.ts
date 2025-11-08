@@ -34,7 +34,6 @@ export class About {
     el.scrollBy({ left: dir * step, behavior: 'smooth' });
   }
 
-  // חיצי מקלדת לגלילה אופקית
   @HostListener('window:keydown', ['$event'])
   onKey(e: KeyboardEvent) {
     if (e.key === 'ArrowRight') this.scroll(1);

@@ -1,15 +1,13 @@
-/* טקסט כללי */
 p {
   margin-bottom: 1rem;
   line-height: 1.6;
 }
 
-/* כותרת */
 h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px; /* רווח בין הכותרת לפסים */
+  gap: 20px; 
   color: rgba(50, 125, 0, 1);
   font-family: 'Inter', sans-serif;
   font-size: 64px;
@@ -19,17 +17,15 @@ h1 {
   position: relative;
 }
 
-/* שני הפסים */
 h1::before,
 h1::after {
   content: "";
   flex: 1;
   height: 2px;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #3C8C06 99.99%);
-  max-width: 300px; /* כדי שהפסים לא יהיו אינסופיים */
+  max-width: 300px; 
 }
 
-/* מכולת about */
 .about-con {
   display: flex;
   align-items: flex-start;
@@ -40,8 +36,6 @@ h1::after {
   padding: 20px;
 }
 
-
-/* התמונה */
 .about-con img {
   width: 650px;
   height: auto;
@@ -50,8 +44,6 @@ padding-left: 50px;
 padding-top: 65px;
 }
 
-
-/* הפסקאות */
 .per {
   max-width: 600px;
   font-family: 'Inter', sans-serif;
@@ -59,7 +51,6 @@ padding-top: 65px;
   color: #333;
 }
 
-/* קרוסלה */
 .carousel-wrap {
   position: relative;
   display: grid;
@@ -111,7 +102,6 @@ padding-top: 65px;
   background: rgba(0, 0, 0, 0.65);
 }
 
-/* סגנון הגלילה */
 .carousel-strip::-webkit-scrollbar {
   height: 8px;
 }

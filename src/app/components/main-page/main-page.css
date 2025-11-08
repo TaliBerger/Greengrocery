@@ -37,8 +37,7 @@ p{
     left: -3px;
     background-repeat: no-repeat;
     background-size: cover !important;   
-    opacity: 1 /* אפשר לשנות לפי הצורך */
-
+    opacity: 1
 }
 
 .hero-content {

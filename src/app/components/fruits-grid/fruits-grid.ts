@@ -25,8 +25,13 @@ export class FruitsGrid implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.ps.load().subscribe(() => {
-      this.fruits = this.ps.getFruits();
+    this.ps.load().subscribe({
+      next: () => {
+        this.fruits = this.ps.getFruits();
+      },
+      error: (err) => {
+        console.error("Failed to load fruits:", err);
+      }
     });
   }
 

@@ -1,10 +1,8 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, switchMap, map } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-/** טיפוסים */
 export interface SessionUser {
   id: string;
   name: string;
@@ -35,7 +33,6 @@ export class AuthService {
   get isLoggedIn(): boolean { return !!this.state$.value; }
   get isAdmin(): boolean { return this.state$.value?.role === 'admin'; }
 
-  /** התחברות */
   login(email: string, password: string): Observable<boolean> {
     const params = new HttpParams().set('email', email);
     return this.http.get<ApiUser[]>(USERS_URL, { params }).pipe(
@@ -52,14 +49,12 @@ export class AuthService {
     );
   }
 
-  /** הרשמה – תמיד role='user' מהאתר */
   register(name: string, email: string, password: string): Observable<boolean> {
     const checkParams = new HttpParams().set('email', email);
     return this.http.get<ApiUser[]>(USERS_URL, { params: checkParams }).pipe(
-      // 404 = אין משתמש כזה → המשיכי ל-POST
       catchError(err => err.status === 404 ? of([] as ApiUser[]) : (() => { throw err; })()),
       switchMap(rows => {
-        if (rows && rows.length) return of(false); // אימייל כבר קיים
+        if (rows && rows.length) return of(false); 
         const body: NewUser = { name, email, password, role: 'user' };
         return this.http.post<ApiUser>(USERS_URL, body).pipe(
           map(u => {

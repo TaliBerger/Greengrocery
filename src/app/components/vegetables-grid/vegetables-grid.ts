@@ -10,7 +10,7 @@ import { Product } from '../../interfaces/product.interface';
 @Component({
   selector: 'app-vegetables-grid',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule], 
   templateUrl: './vegetables-grid.html',
   styleUrls: ['./vegetables-grid.css']
 })
@@ -27,80 +27,14 @@ export class VegetablesGrid implements OnInit {
   ) {}
 
   ngOnInit() {
-    // ✅ אם יש שירות טעינה – נטען ממנו
-    this.ps.load().subscribe(() => {
-      this.vegetables = this.ps.getVegetables();
-    });
-
-    // ✅ אם אין – נטען ידנית דוגמה
-    if (this.vegetables.length === 0) {
-      this.vegetables = [
-        {
-          name: 'Tomato',
-          price: 3.5,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/tomato.jpg',
-          link: 'https://en.wikipedia.org/wiki/Tomato',
-          emoji: ''
+    this.ps.load().subscribe({
+        next: () => {
+             this.vegetables = this.ps.getVegetables();
         },
-        {
-          name: 'Carrot',
-          price: 4.2,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/carrot.jpg',
-          link: 'https://en.wikipedia.org/wiki/Carrot',
-          emoji: ''
-        },
-        {
-          name: 'Cucumber',
-          price: 3.0,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/cucumber.jpg',
-          link: 'https://en.wikipedia.org/wiki/Cucumber',
-          emoji: ''
-        },
-        {
-          name: 'Lettuce',
-          price: 2.8,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/lettuce.jpg',
-          link: 'https://en.wikipedia.org/wiki/Lettuce',
-          emoji: ''
-        },
-        {
-          name: 'Broccoli',
-          price: 5.4,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/broccoli.jpg',
-          link: 'https://en.wikipedia.org/wiki/Broccoli',
-          emoji: ''
-        },
-        {
-          name: 'Onion',
-          price: 2.6,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/onion.jpg',
-          link: 'https://en.wikipedia.org/wiki/Onion',
-          emoji: ''
-        },
-        {
-          name: 'Potato',
-          price: 3.1,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/potato.jpg',
-          link: 'https://en.wikipedia.org/wiki/Potato',
-          emoji: ''
-        },
-        {
-          name: 'Zucchini',
-          price: 4.7,
-          category: 'vegetable',
-          image: 'assets/images/vegetables/zucchini.jpg',
-          link: 'https://en.wikipedia.org/wiki/Zucchini',
-          emoji: ''
+        error: (err) => {
+            console.error("Failed to load vegetables:", err);
         }
-      ];
-    }
+    });
   }
 
   track = (_: number, p: Product) => p.name;

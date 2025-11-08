@@ -25,7 +25,6 @@ export class AddProduct implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // חגורת בטיחות: רק אדמין נכנס
     if (!this.auth.isAdmin) {
       alert(this.auth.isLoggedIn ? 'Access denied' : 'Please log in to place an order');
       this.router.navigateByUrl('/');
@@ -39,7 +38,6 @@ export class AddProduct implements OnInit {
       price: [null]                         
     });
 
-    // price חובה רק בהוספה
     this.productForm.get('action')!.valueChanges.subscribe((action: 'add' | 'delete') => {
       const priceCtrl = this.productForm.get('price')!;
       if (action === 'add') {
@@ -70,7 +68,6 @@ export class AddProduct implements OnInit {
       name,
       category,
       price: +this.productForm.get('price')!.value,
-      // יוצר נתיב אוטומטי לפי קטגוריה ושם
       image: `assets/images/${category}s/${name.toLowerCase()}.jpg`,
       link: '',
       emoji: ''
@@ -85,7 +82,7 @@ export class AddProduct implements OnInit {
         error: (e) => alert('Failed to add product: ' + (e?.message || 'Unknown error'))
       });
 
-    } else { // delete
+    } else { 
       if (!name || !category) {
         alert('Please provide name and category to delete');
         return;

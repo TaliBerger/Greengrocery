@@ -15,16 +15,15 @@ import { CartService } from '../../service/cart.service';
 })
 export class FirstNavbar implements OnInit {
   
-  showSignInNextToCart: boolean = false;   // שליטה על מיקום Sign In
-  cartCount$!: Observable<number>;         // כמות פריטים בעגלה
-  auth: any;                               // שירות האימות
+  showSignInNextToCart: boolean = false;   
+  cartCount$!: Observable<number>;         
+  auth: any;                               
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private cartService: CartService
   ) {
-    // מאזין לשינויי ניתוב
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const routesWithSignIn = ['/vegetables', '/fruits', '/about'];
@@ -34,7 +33,6 @@ export class FirstNavbar implements OnInit {
   }
 
   ngOnInit(): void {
-    // שומר רפרנס לשירותי auth והעגלה
     this.auth = this.authService;
     this.cartCount$ = this.cartService.cartCount$;
   }

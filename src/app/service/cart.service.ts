@@ -60,7 +60,7 @@ setQty(index: number, qty: number) {
   } else {
     this.cart[index] = { ...this.cart[index], qty: next };
   }
-  this.cart = [...this.cart]; // טריגר change detection
+  this.cart = [...this.cart];
   this.recalcCount();
 }
 
@@ -71,7 +71,6 @@ increase(index: number) {
   this.recalcCount();
 }
 
-/** הורדת יחידה אחת לשורה (מוחק אם מגיע ל-0) */
 decrease(index: number) {
   if (!this.cart[index]) return;
   const next = this.cart[index].qty - 1;

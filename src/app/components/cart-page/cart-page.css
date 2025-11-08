@@ -23,7 +23,7 @@ h1::after {
 
 #empty-container{
   color: #ff0000;
-  text-align: center;      /* מרכז את הטקסט */
+  text-align: center;
 
 }
 
@@ -49,9 +49,8 @@ h1::after {
   margin: 20px auto;
 }
 
-/* תמונה בצד שמאל */
 .left-section {
-  flex: 0 0 120px; /* רוחב קבוע */
+  flex: 0 0 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,9 +68,8 @@ h1::after {
   transform: scale(1.1);
 }
 
-/* פרטי המוצר באמצע */
 .middle-section {
-  flex: 1; /* תופס את רוב השורה */
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,7 +116,6 @@ h1::after {
   border-radius: 6px;
 }
 
-/* צד ימין: מחיר וכפתור מחיקה */
 .right-section {
   display: flex;
   flex-direction: column;
@@ -173,70 +170,50 @@ h3,
   cursor: pointer;          
 }
 
-/* כפתור נקה סל */
 .actions button:first-child {
-  background-color: #f0f0f0;  /* אפור בהיר */
+  background-color: #f0f0f0; 
   color: #333;
 }
 
-/* כפתור Place Order */
 .actions button.submit {
-  background-color: #32a852;  /* ירוק בהיר ונעים */
+  background-color: #32a852; 
   color: white;
 }
 
 .actions button:hover {
   opacity: 0.9; 
 }
-/* יש לוודא שה-overlay מכסה את כל שטח ה-viewport */
-.overlay {
-  /* ממרכז את התוכן הפנימי (ה-popup) */
-  display: flex;
-  /* ממרכז אופקית */
-  justify-content: center;
-  /* ממרכז אנכית */
-  align-items: center;
 
-  /* ממלא את כל המסך */
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* אפשר להוסיף רקע שקוף למחצה */
   background-color: rgba(0, 0, 0, 0.5); 
-  /* לוודא שהפופאפ מעל שאר התוכן */
   z-index: 1000; 
 }
 
-/* הגדרות בסיסיות ל-popup כדי להיראות כמו חלון */
 .popup {
   background-color: white; 
   padding: 20px;
   border-radius: 8px; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-  /* מאפשר לתוכן בפנים להיות מרוכז (אם צריך) */
   text-align: center;
 }
-/* מכוון לכפתור הסגירה בתוך הפופאפ */
+
 .popup button {
-  /* צבע רקע ירוק */
-  background-color: #4CAF50; /* גוון ירוק נפוץ ויפה */
-  /* צבע טקסט לבן */
+  background-color: #4CAF50;
   color: white; 
-  /* מרווח פנימי לכפתור */
   padding: 10px 20px;
-  /* הסרת הגבול המקורי של הדפדפן */
   border: none;
-  /* מעגל קצוות קלות */
   border-radius: 5px;
-  /* מציג את סמן העכבר כיד לחיצה */
   cursor: pointer;
-  /* הסרת קו תחתון או אפקטים מיותרים */
   text-decoration: none;
-  /* גודל גופן (אופציונלי) */
   font-size: 16px;
-  /* מרווח עליון כדי להפריד מהטקסט שמעל */
   margin-top: 15px; 
 }
 
